@@ -201,7 +201,7 @@ function typeStep() {
 }
 typeStep();
 
-// ── Loader hide (after first rendered frame) ──────────────────────────────────
+// ── Loader hide ───────────────────────────────────────────────────────────────
 let loaderGone = false;
 function hideLoader() {
   if (loaderGone) return;
@@ -210,6 +210,8 @@ function hideLoader() {
   loader.style.opacity = '0';
   setTimeout(() => loader.style.display = 'none', 600);
 }
+// Fallback: always hide after 2.5 s even if WebGL is unavailable
+setTimeout(hideLoader, 2500);
 
 // ── Custom cursor ────────────────────────────────────────────────────────────
 const cursorEl = document.getElementById('cursor');
