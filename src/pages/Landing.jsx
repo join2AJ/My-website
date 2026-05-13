@@ -78,7 +78,7 @@ function Stat({ num, label }) {
   )
 }
 
-export default function Landing({ onViewRoadmap, onViewAviation }) {
+export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklists }) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -121,6 +121,11 @@ export default function Landing({ onViewRoadmap, onViewAviation }) {
             color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>✈️ Aviation Demo</button>
+          <button onClick={onViewChecklists} style={{
+            padding: '7px 14px', borderRadius: 24, background: T.greenL,
+            color: T.green, border: `1px solid ${T.green}33`, fontSize: 12,
+            fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+          }}>📋 Checklists</button>
           <button onClick={onViewRoadmap} style={{
             padding: '7px 14px', borderRadius: 24, background: T.blueL,
             color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12,

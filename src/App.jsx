@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Landing from './pages/Landing.jsx'
 import RoadmapApp from './components/RoadmapApp.jsx'
 import AviationApp from './components/AviationApp.jsx'
+import ChecklistApp from './components/ChecklistApp.jsx'
 
 const T = { blue: '#1A56DB', navy: '#0D2B6E', border: '#D6E0FF', surface: '#FFFFFF', muted: '#7A90BF', teal: '#0891B2' }
 
@@ -55,5 +56,14 @@ export default function App() {
     )
   }
 
-  return <Landing onViewRoadmap={() => setPage('roadmap')} onViewAviation={() => setPage('aviation')} />
+  if (page === 'checklists') {
+    return (
+      <div>
+        <BackBar title="Airport Operational Checklists" subtitle="Ground Team Tool" onBack={() => setPage('home')} />
+        <ChecklistApp />
+      </div>
+    )
+  }
+
+  return <Landing onViewRoadmap={() => setPage('roadmap')} onViewAviation={() => setPage('aviation')} onViewChecklists={() => setPage('checklists')} />
 }

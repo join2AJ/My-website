@@ -121,7 +121,10 @@ function ComplianceCard({ item, highlight }) {
 
         {/* Teams */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-          {item.teams.map(t => <Pill key={t} label={t} color={T.blue} bg={T.blueL} />)}
+          {item.teams.map(t => {
+            const d = departments.find(x => x.id === t)
+            return <Pill key={t} label={d ? d.name : t} color={d ? d.color : T.blue} />
+          })}
         </div>
 
         {/* Expand hint */}
@@ -197,8 +200,10 @@ function ComplianceCard({ item, highlight }) {
 
 export default function AviationApp() {
   const [nav, setNav] = useState('overview')
-  const [dept, setDept] = useState(null)
+  const [dept, setDept] = useState(null)         // dept ID for compliance filter
   const [statusFilter, setStatusFilter] = useState('all')
+  const [selectedDept, setSelectedDept] = useState(null)  // dept object for dept panel
+  const [deptTab, setDeptTab] = useState('reg')           // 'reg' | 'std' | 'cyber'
 
   const filteredItems = regulatoryItems.filter(item => {
     const matchDept   = !dept || item.teams.includes(dept)
@@ -208,10 +213,10 @@ export default function AviationApp() {
 
   const deptItemCounts = departments.map(d => ({
     ...d,
-    total:   regulatoryItems.filter(i => i.teams.includes(d.name)).length,
-    overdue: regulatoryItems.filter(i => i.teams.includes(d.name) && i.status === 'overdue').length,
-    due:     regulatoryItems.filter(i => i.teams.includes(d.name) && i.status === 'due').length,
-    gap:     regulatoryItems.filter(i => i.teams.includes(d.name) && i.status === 'gap').length,
+    total:   regulatoryItems.filter(i => i.teams.includes(d.id)).length,
+    overdue: regulatoryItems.filter(i => i.teams.includes(d.id) && i.status === 'overdue').length,
+    due:     regulatoryItems.filter(i => i.teams.includes(d.id) && i.status === 'due').length,
+    gap:     regulatoryItems.filter(i => i.teams.includes(d.id) && i.status === 'gap').length,
   }))
 
   return (
@@ -339,7 +344,7 @@ export default function AviationApp() {
               <Card key={d.id} style={{
                 marginBottom: 8, cursor: 'pointer',
                 borderLeft: `4px solid ${d.overdue > 0 ? T.red : T.accent}`,
-              }} onClick={() => { setDept(d.name); setNav('compliance') }}>
+              }} onClick={() => { setDept(d.id); setNav('compliance') }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div style={{ fontSize: 22, flexShrink: 0 }}>{d.icon}</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -387,8 +392,8 @@ export default function AviationApp() {
               <div style={{ display: 'flex', gap: 6, width: 'max-content' }}>
                 <NavBtn active={!dept} color={T.navy} onClick={() => setDept(null)}>All</NavBtn>
                 {departments.map(d => (
-                  <NavBtn key={d.id} active={dept === d.name} color={d.color}
-                    onClick={() => setDept(dept === d.name ? null : d.name)}>
+                  <NavBtn key={d.id} active={dept === d.id} color={d.color}
+                    onClick={() => setDept(dept === d.id ? null : d.id)}>
                     {d.icon} {d.name}
                   </NavBtn>
                 ))}
@@ -411,25 +416,28 @@ export default function AviationApp() {
             </div>
 
             {/* Active department banner */}
-            {dept && (
-              <div style={{
-                padding: '10px 14px', background: T.blueL, borderRadius: 12, marginBottom: 12,
-                display: 'flex', alignItems: 'center', gap: 10,
-                border: `1px solid ${T.blue}22`,
-              }}>
-                <span style={{ fontSize: 20 }}>{departments.find(d => d.name === dept)?.icon}</span>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: T.blue }}>{dept}</div>
-                  <div style={{ fontSize: 10, color: T.muted }}>
-                    {filteredItems.length} obligation{filteredItems.length !== 1 ? 's' : ''}
+            {dept && (() => {
+              const deptObj = departments.find(d => d.id === dept)
+              return (
+                <div style={{
+                  padding: '10px 14px', background: T.blueL, borderRadius: 12, marginBottom: 12,
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  border: `1px solid ${T.blue}22`,
+                }}>
+                  <span style={{ fontSize: 20 }}>{deptObj?.icon}</span>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: T.blue }}>{deptObj?.full || deptObj?.name}</div>
+                    <div style={{ fontSize: 10, color: T.muted }}>
+                      {filteredItems.length} obligation{filteredItems.length !== 1 ? 's' : ''}
+                    </div>
                   </div>
+                  <button onClick={() => setDept(null)} style={{
+                    fontSize: 11, color: T.muted, background: T.surface, border: `1px solid ${T.border}`,
+                    borderRadius: 20, padding: '3px 10px', cursor: 'pointer',
+                  }}>✕ Clear</button>
                 </div>
-                <button onClick={() => setDept(null)} style={{
-                  fontSize: 11, color: T.muted, background: T.surface, border: `1px solid ${T.border}`,
-                  borderRadius: 20, padding: '3px 10px', cursor: 'pointer',
-                }}>✕ Clear</button>
-              </div>
-            )}
+              )
+            })()}
 
             <div className="fade" key={`${dept}-${statusFilter}`}>
               {filteredItems.length === 0
@@ -451,51 +459,132 @@ export default function AviationApp() {
         {/* ─── DEPARTMENTS ─── */}
         {nav === 'departments' && (
           <div>
-            <div style={{ fontSize: 12, color: T.sub, lineHeight: 1.6, marginBottom: 16 }}>
-              {departments.length} airport departments — tap any card to view its compliance obligations.
+            <div style={{ fontSize: 12, color: T.sub, lineHeight: 1.6, marginBottom: 14 }}>
+              {departments.length} departments — tap a card to see regulatory, standards & cybersecurity obligations.
             </div>
-            {deptItemCounts.map(d => (
-              <Card key={d.id} style={{
-                marginBottom: 10, cursor: 'pointer',
-                borderLeft: `4px solid ${d.color}`,
-              }} onClick={() => { setDept(d.name); setNav('compliance') }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{
-                    width: 46, height: 46, borderRadius: 12, flexShrink: 0,
-                    background: d.color + '18',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22,
-                  }}>{d.icon}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: T.text }}>{d.name}</div>
-                    <div style={{ fontSize: 11, color: T.muted, marginTop: 2 }}>
-                      {d.total} compliance obligation{d.total !== 1 ? 's' : ''}
-                    </div>
-                  </div>
-                  <div style={{
-                    fontSize: 10, color: T.blue, fontWeight: 600,
-                    flexShrink: 0, padding: '4px 10px',
-                    background: T.blueL, borderRadius: 20,
-                    border: `1px solid ${T.blue}22`,
-                  }}>View →</div>
-                </div>
-
-                {d.total > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 10 }}>
-                    {d.overdue > 0 && <Pill label={`${d.overdue} Overdue`}  color={T.red}    />}
-                    {d.due > 0     && <Pill label={`${d.due} Due`}          color={T.gold}   />}
-                    {d.gap > 0     && <Pill label={`${d.gap} Gap`}          color={T.accent} />}
-                    {(d.total - d.overdue - d.due - d.gap) > 0 && (
-                      <Pill label={`${d.total - d.overdue - d.due - d.gap} Compliant`} color={T.green} />
+            {/* 2-col dept grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
+              {departments.map(d => {
+                const cnt = deptItemCounts.find(x => x.id === d.id)
+                const isSelected = selectedDept?.id === d.id
+                return (
+                  <div key={d.id} onClick={() => {
+                    if (isSelected) { setSelectedDept(null) } else { setSelectedDept(d); setDeptTab('reg') }
+                  }} style={{
+                    background: isSelected ? d.color + '12' : T.surface,
+                    border: `1.5px solid ${isSelected ? d.color : T.border}`,
+                    borderRadius: 14, padding: '12px 10px', cursor: 'pointer',
+                    position: 'relative', overflow: 'hidden',
+                    transition: 'border-color 0.15s',
+                  }}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: d.color, borderRadius: '14px 14px 0 0' }} />
+                    <div style={{ fontSize: 22, marginBottom: 6 }}>{d.icon}</div>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 2, lineHeight: 1.3 }}>{d.full}</div>
+                    <div style={{ fontSize: 9, color: T.muted, marginBottom: 6 }}>{d.tag}</div>
+                    {cnt && cnt.total > 0 && (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+                        {cnt.overdue > 0 && <Pill label={`${cnt.overdue} OVD`} color={T.red} />}
+                        {cnt.due > 0     && <Pill label={`${cnt.due} DUE`}    color={T.gold} />}
+                        {cnt.gap > 0     && <Pill label={`${cnt.gap} GAP`}    color={T.accent} />}
+                      </div>
+                    )}
+                    {cnt && cnt.total === 0 && (
+                      <div style={{ fontSize: 9, color: T.muted }}>Framework items</div>
                     )}
                   </div>
-                )}
-                {d.total === 0 && (
-                  <div style={{ fontSize: 11, color: T.muted, fontStyle: 'italic', marginTop: 8 }}>
-                    No direct obligations tracked yet
+                )
+              })}
+            </div>
+
+            {/* Dept detail panel */}
+            {selectedDept && (
+              <div className="fade" style={{
+                background: T.surface, border: `2px solid ${selectedDept.color}`,
+                borderRadius: 16, overflow: 'hidden', marginBottom: 14,
+              }}>
+                {/* Panel header */}
+                <div style={{
+                  background: selectedDept.color + '12',
+                  borderBottom: `1px solid ${selectedDept.color}33`,
+                  padding: '14px 16px',
+                  display: 'flex', alignItems: 'center', gap: 12,
+                }}>
+                  <div style={{
+                    width: 48, height: 48, borderRadius: 12, flexShrink: 0,
+                    background: selectedDept.color + '20',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24,
+                  }}>{selectedDept.icon}</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 15, fontWeight: 800, color: T.navy, lineHeight: 1.2 }}>{selectedDept.full}</div>
+                    <div style={{ fontSize: 10, color: T.muted, marginTop: 3 }}>
+                      {selectedDept.tag} · {selectedDept.regulatory.length} regulatory · {selectedDept.standards.length} standards · {selectedDept.cyber.length} cyber
+                    </div>
                   </div>
-                )}
-              </Card>
-            ))}
+                  <button onClick={() => setSelectedDept(null)} style={{
+                    fontSize: 10, color: T.muted, background: T.surface,
+                    border: `1px solid ${T.border}`, borderRadius: 20,
+                    padding: '4px 10px', cursor: 'pointer', flexShrink: 0,
+                  }}>✕</button>
+                </div>
+
+                {/* Tab row */}
+                <div style={{ display: 'flex', gap: 6, padding: '10px 14px', borderBottom: `1px solid ${T.border}`, flexWrap: 'wrap' }}>
+                  {[
+                    { id:'reg',   label:`⚖️ Regulatory (${selectedDept.regulatory.length})`,  activeColor:T.red,    activeBg:T.redL    },
+                    { id:'std',   label:`🏅 Standards (${selectedDept.standards.length})`,      activeColor:T.blue,   activeBg:T.blueL   },
+                    { id:'cyber', label:`🔐 Cyber (${selectedDept.cyber.length})`,              activeColor:T.purple, activeBg:T.purpleL },
+                  ].map(tab => (
+                    <button key={tab.id} onClick={() => setDeptTab(tab.id)} style={{
+                      padding: '6px 13px', borderRadius: 18, fontSize: 11, fontWeight: 700,
+                      border: `1.5px solid ${deptTab === tab.id ? tab.activeColor : T.border}`,
+                      background: deptTab === tab.id ? tab.activeBg : T.surface,
+                      color: deptTab === tab.id ? tab.activeColor : T.muted,
+                      cursor: 'pointer', whiteSpace: 'nowrap',
+                    }}>{tab.label}</button>
+                  ))}
+                  <button onClick={() => { setDept(selectedDept.id); setNav('compliance') }} style={{
+                    marginLeft: 'auto', padding: '6px 13px', borderRadius: 18, fontSize: 11,
+                    fontWeight: 700, border: `1.5px solid ${T.blue}44`, background: T.blueL,
+                    color: T.blue, cursor: 'pointer', whiteSpace: 'nowrap',
+                  }}>📋 View Actions →</button>
+                </div>
+
+                {/* Item list */}
+                <div style={{ padding: '12px 14px' }}>
+                  {(() => {
+                    const items = deptTab === 'reg' ? selectedDept.regulatory
+                                : deptTab === 'std' ? selectedDept.standards
+                                : selectedDept.cyber
+                    const dotColor = deptTab === 'reg' ? T.red : deptTab === 'std' ? T.blue : T.purple
+                    if (items.length === 0) {
+                      return <div style={{ fontSize: 12, color: T.muted, textAlign: 'center', padding: '16px 0' }}>
+                        No specific cybersecurity items beyond general CERT-In compliance
+                      </div>
+                    }
+                    return items.map((item, i) => (
+                      <div key={i} style={{
+                        display: 'flex', alignItems: 'flex-start', gap: 10,
+                        padding: '10px 12px', borderRadius: 10,
+                        border: `1px solid ${T.border}`, background: T.card,
+                        marginBottom: i < items.length - 1 ? 6 : 0,
+                      }}>
+                        <div style={{
+                          width: 8, height: 8, borderRadius: 2, flexShrink: 0,
+                          background: dotColor, marginTop: 4,
+                        }} />
+                        <span style={{ flex: 1, fontSize: 11, color: T.sub, lineHeight: 1.5 }}>{item.text}</span>
+                        <span style={{
+                          fontSize: 9, color: T.muted, fontWeight: 700,
+                          whiteSpace: 'nowrap', paddingLeft: 6,
+                          background: T.surface, padding: '2px 7px', borderRadius: 8,
+                          border: `1px solid ${T.border}`,
+                        }}>{item.ref}</span>
+                      </div>
+                    ))
+                  })()}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
