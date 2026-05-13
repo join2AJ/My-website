@@ -7,7 +7,7 @@ const T = {
   accent: '#FF6B35', green: '#0E9F6E', greenL: '#ECFDF5',
   purple: '#7C3AED', purpleL: '#F5F3FF',
   gold: '#D97706', goldL: '#FFFBEB',
-  red: '#DC2626', redL: '#FEF2F2', teal: '#0891B2',
+  red: '#DC2626', redL: '#FEF2F2', teal: '#0891B2', tealL: '#ECFEFF',
 }
 
 const sectors = [
@@ -78,7 +78,7 @@ function Stat({ num, label }) {
   )
 }
 
-export default function Landing({ onViewRoadmap }) {
+export default function Landing({ onViewRoadmap, onViewAviation }) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -116,6 +116,10 @@ export default function Landing({ onViewRoadmap }) {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <button onClick={onViewAviation} style={{
+            padding: '7px 16px', borderRadius: 24, background: '#ECFEFF',
+            color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+          }}>✈️ Aviation Demo</button>
           <button onClick={onViewRoadmap} style={{
             padding: '7px 16px', borderRadius: 24, background: T.blueL,
             color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12, fontWeight: 600, cursor: 'pointer',
