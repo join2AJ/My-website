@@ -104,31 +104,33 @@ export default function Landing({ onViewRoadmap, onViewAviation }) {
         justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50,
         boxShadow: '0 1px 12px rgba(26,86,219,0.07)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
           <div style={{
             width: 38, height: 38, borderRadius: 10, flexShrink: 0,
             background: `linear-gradient(135deg, ${T.blue}, ${T.navy})`,
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
           }}>🇮🇳</div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: T.navy, letterSpacing: '-0.02em', lineHeight: 1 }}>CompliantBharat</div>
-            <div style={{ fontSize: 9, color: T.muted, letterSpacing: '0.05em' }}>India's Compliance OS</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: T.navy, letterSpacing: '-0.02em', lineHeight: 1, whiteSpace: 'nowrap' }}>CompliantBharat</div>
+            <div style={{ fontSize: 9, color: T.muted, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>India's Compliance OS</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexShrink: 0 }}>
           <button onClick={onViewAviation} style={{
-            padding: '7px 16px', borderRadius: 24, background: '#ECFEFF',
-            color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+            padding: '7px 14px', borderRadius: 24, background: '#ECFEFF',
+            color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12,
+            fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>✈️ Aviation Demo</button>
           <button onClick={onViewRoadmap} style={{
-            padding: '7px 16px', borderRadius: 24, background: T.blueL,
-            color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+            padding: '7px 14px', borderRadius: 24, background: T.blueL,
+            color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12,
+            fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>Platform Vision</button>
           <button style={{
-            padding: '7px 16px', borderRadius: 24, border: 'none', cursor: 'pointer',
+            padding: '7px 14px', borderRadius: 24, border: 'none', cursor: 'pointer',
             background: `linear-gradient(135deg, ${T.blue}, ${T.navy})`,
             color: '#fff', fontSize: 12, fontWeight: 600,
-            boxShadow: `0 2px 10px ${T.blue}44`,
+            boxShadow: `0 2px 10px ${T.blue}44`, whiteSpace: 'nowrap',
           }}>Join Waitlist</button>
         </div>
       </nav>
