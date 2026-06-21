@@ -231,9 +231,9 @@ export default function AviationApp() {
       `}</style>
 
       {/* ── HEADER ── */}
-      <div style={{
+      <div className="avia-hdr" style={{
         background: T.surface, borderBottom: `1px solid ${T.border}`,
-        padding: '12px 16px', boxShadow: '0 1px 12px rgba(26,86,219,0.08)',
+        boxShadow: '0 1px 12px rgba(26,86,219,0.08)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
@@ -270,9 +270,8 @@ export default function AviationApp() {
       </div>
 
       {/* ── TAB NAV ── */}
-      <div style={{
+      <div className="avia-tab" style={{
         background: T.surface, borderBottom: `1px solid ${T.border}`,
-        padding: '6px 14px', display: 'flex', overflowX: 'auto', gap: 4,
       }}>
         {TOP_NAVS.map(({ id, icon, label }) => (
           <NavBtn key={id} active={nav === id} onClick={() => setNav(id)}>

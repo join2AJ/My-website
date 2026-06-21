@@ -291,7 +291,7 @@ export default function ChecklistApp() {
       `}</style>
 
       {/* Hero */}
-      <div style={{ background: T.navy, color: '#fff', padding: '20px 16px 18px' }}>
+      <div className="chk-hero" style={{ background: T.navy, color: '#fff' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', borderRadius: 18,
           background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)',
@@ -307,9 +307,8 @@ export default function ChecklistApp() {
       </div>
 
       {/* Section tabs */}
-      <div style={{
+      <div className="chk-tabs" style={{
         background: T.surface, borderBottom: `1px solid ${T.border}`,
-        padding: '8px 14px', display: 'flex', gap: 4, overflowX: 'auto',
       }}>
         {sections.map(sec => (
           <button key={sec} onClick={() => setActiveSection(sec)} style={{

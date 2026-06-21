@@ -8,10 +8,9 @@ const T = { blue: '#1A56DB', navy: '#0D2B6E', border: '#D6E0FF', surface: '#FFFF
 
 function BackBar({ title, subtitle, onBack }) {
   return (
-    <div style={{
+    <div className="backbar" style={{
       position: 'sticky', top: 0, zIndex: 100,
       background: T.surface, borderBottom: `1px solid ${T.border}`,
-      padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 12,
       boxShadow: '0 1px 8px rgba(26,86,219,0.08)',
     }}>
       <button
