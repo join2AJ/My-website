@@ -1,7 +1,70 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; overflow-x: hidden; }
 button { font-family: inherit; cursor: pointer; }
 input, textarea { font-family: inherit; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-thumb { background: #93B4F8; border-radius: 4px; }
+
+/* ── Aviation App – responsive page content ── */
+.avia-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 56px;
+}
+@media (min-width: 768px)  { .avia-page { padding: 20px 32px 56px; } }
+@media (min-width: 1024px) { .avia-page { padding: 24px 48px 56px; } }
+
+/* Compliance health stats: 2-col → 4-col */
+.health-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (min-width: 640px) { .health-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* Score cards: always 2 columns */
+.score-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+/* Compliance items: 1-col → 2-col on wide screens */
+.compliance-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 900px) { .compliance-grid { grid-template-columns: 1fr 1fr; } }
+
+/* Department cards: 2-col → 3-col → 4-col */
+.dept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+@media (min-width: 640px)  { .dept-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+@media (min-width: 1024px) { .dept-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ── Checklist App – max-width content ── */
+.chk-page {
+  padding: 14px 16px 56px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) { .chk-page { padding: 20px 24px 56px; } }
+
+/* Measurement input grid */
+.measure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px;
+}
+
+/* ── Landing nav – hide secondary buttons on small screens ── */
+@media (max-width: 540px) {
+  .nav-hide-sm { display: none !important; }
+}

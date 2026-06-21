@@ -87,8 +87,7 @@ function StepCard({ step, phaseColor, states, onToggle, onStatus, onFinding, onM
 
       {/* Measurements */}
       {step.measurements && step.measurements.length > 0 && (
-        <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 6,
+        <div className="measure-grid" style={{
           padding: '0 12px 10px', borderTop: `1px solid ${T.border}`,
           paddingTop: 10,
         }}>
@@ -323,7 +322,7 @@ export default function ChecklistApp() {
       </div>
 
       {/* Checklists */}
-      <div style={{ padding: '14px 14px 56px' }}>
+      <div className="chk-page">
         {visible.map(cl => (
           <ChecklistBlock
             key={cl.id}

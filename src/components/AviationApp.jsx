@@ -88,7 +88,7 @@ function ComplianceCard({ item, highlight }) {
   const [open, setOpen] = useState(false)
   return (
     <Card style={{
-      marginBottom: 10, borderLeft: `4px solid ${item.regulatorColor}`,
+      borderLeft: `4px solid ${item.regulatorColor}`,
       background: highlight ? '#FFFDF5' : T.surface,
     }}>
       {/* HEADER ROW */}
@@ -282,7 +282,7 @@ export default function AviationApp() {
       </div>
 
       {/* ── PAGE CONTENT ── */}
-      <div className="fade" key={nav} style={{ padding: '16px 14px 56px' }}>
+      <div className="fade avia-page" key={nav}>
 
         {/* ─── OVERVIEW ─── */}
         {nav === 'overview' && (
@@ -299,7 +299,7 @@ export default function AviationApp() {
                 {counts.total} regulatory obligations · {departments.length} departments
               </div>
               {/* 2×2 grid — more readable on mobile */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              <div className="health-grid">
                 {[
                   { n: counts.compliant, l: 'Compliant', c: '#6EE7B7' },
                   { n: counts.due,       l: 'Due Soon',  c: '#FCD34D' },
@@ -318,7 +318,7 @@ export default function AviationApp() {
             </div>
 
             {/* Score cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
+            <div className="score-grid">
               {[
                 { label: 'Regulatory Score', score: regulatoryScore },
                 { label: 'Standards Score',  score: standardsScore  },
@@ -448,9 +448,13 @@ export default function AviationApp() {
                     </div>
                   </Card>
                 )
-                : filteredItems.map(item => (
-                  <ComplianceCard key={item.id} item={item} highlight={!!dept} />
-                ))
+                : (
+                  <div className="compliance-grid">
+                    {filteredItems.map(item => (
+                      <ComplianceCard key={item.id} item={item} highlight={!!dept} />
+                    ))}
+                  </div>
+                )
               }
             </div>
           </div>
@@ -463,7 +467,7 @@ export default function AviationApp() {
               {departments.length} departments — tap a card to see regulatory, standards & cybersecurity obligations.
             </div>
             {/* 2-col dept grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
+            <div className="dept-grid">
               {departments.map(d => {
                 const cnt = deptItemCounts.find(x => x.id === d.id)
                 const isSelected = selectedDept?.id === d.id

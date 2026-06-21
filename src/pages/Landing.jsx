@@ -11,15 +11,24 @@ const T = {
 }
 
 const sectors = [
-  { icon:'🏦', name:'Finance & Banking', color:T.red,    count:'200+' },
-  { icon:'✈️', name:'Aviation',          color:T.blue,   count:'150+' },
-  { icon:'🏥', name:'Healthcare',        color:T.purple, count:'180+' },
-  { icon:'🏭', name:'Manufacturing',     color:T.teal,   count:'250+' },
-  { icon:'🌾', name:'Food & Agri',       color:T.green,  count:'120+' },
-  { icon:'💻', name:'IT / Tech',         color:T.blue,   count:'80+'  },
-  { icon:'⚡', name:'Energy',            color:T.gold,   count:'130+' },
-  { icon:'🎓', name:'Education',         color:T.purple, count:'90+'  },
-  { icon:'🏢', name:'Universal',         color:T.muted,  count:'60+'  },
+  { icon:'🏦', name:'Finance & Banking',   color:T.red,    count:'200+', reg:'SEBI · RBI · IRDAI' },
+  { icon:'✈️', name:'Aviation',            color:T.blue,   count:'150+', reg:'DGCA · AAI · BCAS' },
+  { icon:'🏥', name:'Healthcare',          color:T.purple, count:'180+', reg:'NMC · NABH · CPCB' },
+  { icon:'🏭', name:'Manufacturing',       color:T.teal,   count:'250+', reg:'BIS · DPIIT · MSME' },
+  { icon:'🌾', name:'Food & Agriculture',  color:T.green,  count:'120+', reg:'FSSAI · APEDA · AGMARK' },
+  { icon:'💻', name:'IT / Technology',     color:T.blue,   count:'80+',  reg:'MeitY · CERT-In · TRAI' },
+  { icon:'⚡', name:'Energy & Power',      color:T.gold,   count:'130+', reg:'CERC · BEE · MNRE' },
+  { icon:'🎓', name:'Education',           color:T.purple, count:'90+',  reg:'UGC · AICTE · NCTE' },
+  { icon:'💊', name:'Pharma & Chemicals',  color:T.teal,   count:'160+', reg:'CDSCO · DCGI · MSIHC' },
+  { icon:'🛢️', name:'Oil & Gas',           color:T.accent, count:'140+', reg:'PNGRB · OISD · MoPNG' },
+  { icon:'📡', name:'Telecom',             color:T.blue,   count:'100+', reg:'TRAI · DOT · WPC' },
+  { icon:'🏗️', name:'Real Estate',         color:T.gold,   count:'110+', reg:'RERA · NBC · MoHUA' },
+  { icon:'🚢', name:'Maritime & Ports',    color:T.teal,   count:'120+', reg:'DG Shipping · TAMP' },
+  { icon:'🛡️', name:'Insurance',           color:T.red,    count:'100+', reg:'IRDAI · GIC · LIC Reg' },
+  { icon:'🚛', name:'Logistics',           color:T.muted,  count:'90+',  reg:'MoRTH · DGMS · MSME' },
+  { icon:'📺', name:'Media & OTT',         color:T.purple, count:'70+',  reg:'MIB · TRAI · MEITY' },
+  { icon:'🛒', name:'Retail & E-Commerce', color:T.green,  count:'80+',  reg:'CCPA · BIS · MCA' },
+  { icon:'🏢', name:'Universal / MSME',    color:T.muted,  count:'60+',  reg:'MSME · Startup India' },
 ]
 
 const buildingNow = [
@@ -115,18 +124,18 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
             <div style={{ fontSize: 9, color: T.muted, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>India's Compliance OS</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexShrink: 0 }}>
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexShrink: 1, minWidth: 0, overflow: 'hidden' }}>
           <button onClick={onViewAviation} style={{
             padding: '7px 14px', borderRadius: 24, background: '#ECFEFF',
             color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>✈️ Aviation Demo</button>
-          <button onClick={onViewChecklists} style={{
+          <button onClick={onViewChecklists} className="nav-hide-sm" style={{
             padding: '7px 14px', borderRadius: 24, background: T.greenL,
             color: T.green, border: `1px solid ${T.green}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>📋 Checklists</button>
-          <button onClick={onViewRoadmap} style={{
+          <button onClick={onViewRoadmap} className="nav-hide-sm" style={{
             padding: '7px 14px', borderRadius: 24, background: T.blueL,
             color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
@@ -165,7 +174,7 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
           <strong style={{ color: T.red }}>Regulatory</strong> +{' '}
           <strong style={{ color: T.blue }}>Standards</strong> +{' '}
           <strong style={{ color: T.gold }}>Gold</strong> compliance for every Indian business.{' '}
-          50+ regulators. 11 sectors. One dashboard.
+          50+ regulators. 18 sectors. One dashboard.
         </p>
 
         {/* Stats bar */}
@@ -174,7 +183,7 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
           border: `1px solid ${T.border}`, borderRadius: 16, padding: '20px 10px',
           maxWidth: 580, margin: '0 auto 36px', gap: 0,
         }}>
-          {[['50+','Regulators'],['11','Sectors'],['1,500+','Obligations'],['4','Delivery Models']].map(([n,l], i, arr) => (
+          {[['50+','Regulators'],['18','Sectors'],['2,000+','Obligations'],['4','Delivery Models']].map(([n,l], i, arr) => (
             <div key={l} style={{ flex: 1, borderRight: i < arr.length - 1 ? `1px solid ${T.border}` : 'none' }}>
               <Stat num={n} label={l} />
             </div>
@@ -278,13 +287,14 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: T.blue, letterSpacing: '0.1em', marginBottom: 8 }}>COVERAGE</div>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 8 }}>Every Indian sector. Every regulator.</h2>
-            <p style={{ fontSize: 13, color: T.sub }}>Pre-built compliance libraries across 11 sectors — ready on day one.</p>
+            <p style={{ fontSize: 13, color: T.sub }}>Pre-built compliance libraries across 18 sectors — ready on day one.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
             {sectors.map(s => (
-              <div key={s.name} style={{ background: T.card, borderRadius: 14, padding: '18px 8px', textAlign: 'center', border: `1px solid ${T.border}` }}>
-                <div style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, color: T.text, lineHeight: 1.3, marginBottom: 5 }}>{s.name}</div>
+              <div key={s.name} style={{ background: T.card, borderRadius: 14, padding: '16px 12px', textAlign: 'center', border: `1px solid ${T.border}` }}>
+                <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: T.text, lineHeight: 1.3, marginBottom: 4 }}>{s.name}</div>
+                <div style={{ fontSize: 9, color: T.muted, lineHeight: 1.4, marginBottom: 5 }}>{s.reg}</div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: s.color }}>{s.count} items</div>
               </div>
             ))}
@@ -321,7 +331,7 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
         <div style={{ fontSize: 11, fontWeight: 700, color: T.blue, letterSpacing: '0.1em', marginBottom: 14 }}>PLATFORM BLUEPRINT</div>
         <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 16 }}>See the complete platform vision</h2>
         <p style={{ fontSize: 13, color: T.sub, lineHeight: 1.8, marginBottom: 32 }}>
-          Explore the full interactive blueprint — 3 compliance layers, 11 sectors, 4 delivery models,
+          Explore the full interactive blueprint — 3 compliance layers, 18 sectors, 4 delivery models,
           35+ services, 12 revenue streams, and the AWS-scale vision for Indian compliance infrastructure.
         </p>
         <button onClick={onViewRoadmap} style={{ ...btnPrimary, marginBottom: 40 }}>
