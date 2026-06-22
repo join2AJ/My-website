@@ -207,7 +207,7 @@ export default function RoadmapApp() {
       `}</style>
 
       {/* HEADER */}
-      <div style={{ background:T.surface, borderBottom:`1px solid ${T.border}`, padding:"12px 16px", boxShadow:"0 1px 12px rgba(26,86,219,0.08)" }}>
+      <div className="avia-hdr" style={{ background:T.surface, borderBottom:`1px solid ${T.border}`, boxShadow:"0 1px 12px rgba(26,86,219,0.08)" }}>
         <div style={{ display:"flex", alignItems:"center", gap:10 }}>
           <div style={{ width:42, height:42, borderRadius:12, background:`linear-gradient(135deg, ${T.blue}, ${T.navy})`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:22, flexShrink:0, boxShadow:`0 2px 12px ${T.blue}44` }}>🇮🇳</div>
           <div>
@@ -223,7 +223,7 @@ export default function RoadmapApp() {
       </div>
 
       {/* NAV */}
-      <div style={{ background:T.surface, borderBottom:`1px solid ${T.border}`, padding:"6px 14px", display:"flex", overflowX:"auto", gap:4 }}>
+      <div className="avia-tab" style={{ background:T.surface, borderBottom:`1px solid ${T.border}` }}>
         {TOP_NAVS.map(({ id, icon, label }) => (
           <button key={id} onClick={() => setNav(id)} style={{
             padding:"7px 14px", borderRadius:24, fontSize:11, fontWeight:600, flexShrink:0, border:"none",
@@ -234,16 +234,16 @@ export default function RoadmapApp() {
         ))}
       </div>
 
-      <div className="fade" key={nav} style={{ padding:"16px 14px 48px" }}>
+      <div className="fade avia-page" key={nav}>
 
         {/* OVERVIEW */}
         {nav === "overview" && (
           <div>
             <div style={{ background:`linear-gradient(135deg, ${T.navy} 0%, ${T.blue} 100%)`, borderRadius:18, padding:20, marginBottom:14, color:"#fff" }}>
               <div style={{ fontSize:22, fontWeight:800, lineHeight:1.3, marginBottom:8, letterSpacing:"-0.02em" }}>India's First Three-Layer<br />Compliance Intelligence Platform</div>
-              <div style={{ fontSize:12, opacity:0.82, lineHeight:1.7 }}>50+ regulatory bodies · 11 industry sectors · 1,500+ compliance obligations · 4 delivery models · 12 revenue streams — unified in one national platform.</div>
+              <div style={{ fontSize:12, opacity:0.82, lineHeight:1.7 }}>50+ regulatory bodies · 18 industry sectors · 2,000+ compliance obligations · 4 delivery models · 12 revenue streams — unified in one national platform.</div>
               <div style={{ marginTop:14, display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8 }}>
-                {[["50+","Regulators"],["11","Sectors"],["1,500+","Obligations"]].map(([n,l])=>(
+                {[["50+","Regulators"],["18","Sectors"],["2,000+","Obligations"]].map(([n,l])=>(
                   <div key={l} style={{ background:"rgba(255,255,255,0.12)", borderRadius:10, padding:"10px 8px", textAlign:"center" }}>
                     <div style={{ fontSize:20, fontWeight:800 }}>{n}</div>
                     <div style={{ fontSize:10, opacity:0.75, marginTop:2 }}>{l}</div>
@@ -345,7 +345,7 @@ export default function RoadmapApp() {
         {nav === "sectors" && (
           <div>
             <SectionTitle>Regulatory Universe × Sector Matrix</SectionTitle>
-            <div style={{ fontSize:12, color:T.sub, marginBottom:14 }}>11 sectors · 50+ regulators · 1,500+ compliance items — every Indian business mapped.</div>
+            <div style={{ fontSize:12, color:T.sub, marginBottom:14 }}>18 sectors · 50+ regulators · 2,000+ compliance items — every Indian business mapped.</div>
             <div style={{ display:"flex", gap:6, overflowX:"auto", marginBottom:12, paddingBottom:4 }}>
               {regulatoryUniverse.map((s,i)=>(
                 <button key={i} onClick={()=>{setSector(i);setSectorTab(0)}} style={{ flexShrink:0, padding:"8px 10px", borderRadius:10, textAlign:"center", minWidth:68, border:"none", background: sector===i ? s.color : T.surface, boxShadow: sector===i ? `0 2px 8px ${s.color}33` : `0 0 0 1.5px ${T.border}` }}>

@@ -150,49 +150,53 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ padding: '64px 6% 52px', textAlign: 'center', maxWidth: 920, margin: '0 auto' }}>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '5px 16px', borderRadius: 24,
-          background: T.blueL, border: `1px solid ${T.blue}33`,
-          color: T.blue, fontSize: 11, fontWeight: 700, marginBottom: 28, letterSpacing: '0.04em',
-        }}>🇮🇳 BUILT FOR INDIA · NOW IN DEVELOPMENT</div>
+      <section style={{ padding: '64px 6% 52px', maxWidth: 1100, margin: '0 auto' }}>
+        <div className="hero-inner">
 
-        <h1 style={{
-          fontSize: 'clamp(2.2rem, 6vw, 4rem)', fontWeight: 900, color: T.navy,
-          lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 22,
-        }}>
-          India's First<br />
-          <span style={{
-            background: `linear-gradient(135deg, ${T.blue} 0%, ${T.navy} 100%)`,
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-          }}>Compliance Operating System</span>
-        </h1>
+          {/* Left col: badge + headline + description */}
+          <div>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '5px 16px', borderRadius: 24,
+              background: T.blueL, border: `1px solid ${T.blue}33`,
+              color: T.blue, fontSize: 11, fontWeight: 700, marginBottom: 28, letterSpacing: '0.04em',
+            }}>🇮🇳 BUILT FOR INDIA · NOW IN DEVELOPMENT</div>
 
-        <p style={{ fontSize: 'clamp(14px, 2vw, 17px)', color: T.sub, lineHeight: 1.75, marginBottom: 36, maxWidth: 620, margin: '0 auto 36px' }}>
-          The first platform that unifies{' '}
-          <strong style={{ color: T.red }}>Regulatory</strong> +{' '}
-          <strong style={{ color: T.blue }}>Standards</strong> +{' '}
-          <strong style={{ color: T.gold }}>Gold</strong> compliance for every Indian business.{' '}
-          50+ regulators. 18 sectors. One dashboard.
-        </p>
+            <h1 style={{
+              fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 900, color: T.navy,
+              lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 22,
+            }}>
+              India's First<br />
+              <span style={{
+                background: `linear-gradient(135deg, ${T.blue} 0%, ${T.navy} 100%)`,
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+              }}>Compliance<br />Operating System</span>
+            </h1>
 
-        {/* Stats bar */}
-        <div style={{
-          display: 'flex', justifyContent: 'center', background: T.surface,
-          border: `1px solid ${T.border}`, borderRadius: 16, padding: '20px 10px',
-          maxWidth: 580, margin: '0 auto 36px', gap: 0,
-        }}>
-          {[['50+','Regulators'],['18','Sectors'],['2,000+','Obligations'],['4','Delivery Models']].map(([n,l], i, arr) => (
-            <div key={l} style={{ flex: 1, borderRight: i < arr.length - 1 ? `1px solid ${T.border}` : 'none' }}>
-              <Stat num={n} label={l} />
+            <p style={{ fontSize: 'clamp(14px, 1.8vw, 16px)', color: T.sub, lineHeight: 1.8, marginBottom: 28, maxWidth: 560 }}>
+              The first platform that unifies{' '}
+              <strong style={{ color: T.red }}>Regulatory</strong> +{' '}
+              <strong style={{ color: T.blue }}>Standards</strong> +{' '}
+              <strong style={{ color: T.gold }}>Gold</strong> compliance for every Indian business.
+              50+ regulators. 18 sectors. One dashboard.
+            </p>
+          </div>
+
+          {/* Right col: stats + CTAs */}
+          <div>
+            <div className="hero-stats">
+              {[['50+','Regulators'],['18','Sectors'],['2,000+','Obligations'],['4','Delivery Models']].map(([n,l], i, arr) => (
+                <div key={l} style={{ flex: 1, borderRight: i < arr.length - 1 ? `1px solid ${T.border}` : 'none' }}>
+                  <Stat num={n} label={l} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            <div className="hero-cta">
+              <button style={btnPrimary} onClick={onViewRoadmap}>Explore Platform Vision →</button>
+              <button style={btnOutline}>Join Early Access</button>
+            </div>
+          </div>
 
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button style={btnPrimary} onClick={onViewRoadmap}>Explore Platform Vision →</button>
-          <button style={btnOutline}>Join Early Access</button>
         </div>
       </section>
 
