@@ -1,208 +1,245 @@
 import { useState } from 'react'
-import { LIGHT, DARK } from '../themes.js'
+import { Button } from '../design-system/components/buttons/Button.jsx'
+import { Card } from '../design-system/components/data/Card.jsx'
+import { SectorTag, SECTORS } from '../design-system/components/badges/SectorTag.jsx'
+import { StatusBadge } from '../design-system/components/badges/StatusBadge.jsx'
 
 export default function Landing({ dark = false, onToggleDark, onViewRoadmap, onViewAviation, onViewChecklists, onViewAdmin }) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
-  const T = dark ? DARK : LIGHT
 
-  const sectors = [
-    { icon:'🏦', name:'Finance & Banking', count:'200+' },
-    { icon:'✈️', name:'Aviation', count:'150+' },
-    { icon:'🏥', name:'Healthcare', count:'180+' },
-    { icon:'🏭', name:'Manufacturing', count:'250+' },
-    { icon:'🌾', name:'Food & Agri', count:'120+' },
-    { icon:'💻', name:'IT / Tech', count:'80+' },
-    { icon:'⚡', name:'Energy', count:'130+' },
-    { icon:'🎓', name:'Education', count:'90+' },
-    { icon:'💊', name:'Pharma', count:'160+' },
-    { icon:'🛢️', name:'Oil & Gas', count:'140+' },
-    { icon:'📡', name:'Telecom', count:'100+' },
-    { icon:'🏗️', name:'Real Estate', count:'110+' },
-    { icon:'🚢', name:'Maritime', count:'120+' },
-    { icon:'🛡️', name:'Insurance', count:'100+' },
-    { icon:'🚛', name:'Logistics', count:'90+' },
-    { icon:'📺', name:'Media & OTT', count:'70+' },
-    { icon:'🛒', name:'Retail', count:'80+' },
-    { icon:'🏢', name:'MSME', count:'60+' },
-  ]
+  const heroBg = dark
+    ? 'radial-gradient(130% 120% at 80% -10%, #0D2B6E 0%, #071830 50%, #050F22 100%)'
+    : 'linear-gradient(180deg, var(--cloud-150) 0%, var(--surface-card) 100%)'
+
+  const heroText = dark ? 'var(--white)' : 'var(--text-strong)'
+  const heroAccent = dark ? 'var(--blue-300)' : 'var(--navy-500)'
+  const heroSub = dark ? 'var(--blue-200)' : 'var(--text-secondary)'
 
   return (
-    <div style={{ background: T.bg, minHeight: '100vh', color: T.text, fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+    <div style={{ background: 'var(--surface-app)', minHeight: '100vh', color: 'var(--text-body)' }}>
       {/* ─── NAVIGATION ─── */}
       <nav style={{
         position: 'sticky', top: 0, zIndex: 100,
-        background: `linear-gradient(to bottom, ${T.bg}, ${T.bg}dd)`,
-        backdropFilter: 'blur(12px)',
-        padding: '16px 6%',
+        background: dark ? 'var(--navy-800)' : 'var(--white)',
+        borderBottom: '1px solid var(--border-hairline)',
+        padding: '16px 40px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        borderBottom: `1px solid ${T.border}`,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{
-            width: 40, height: 40, borderRadius: 12,
-            background: T.sage, display: 'flex',
+            width: 40, height: 40, borderRadius: 10,
+            background: 'var(--navy-500)', display: 'flex',
             alignItems: 'center', justifyContent: 'center',
-            fontSize: 20, fontWeight: 800, color: T.white,
+            fontSize: 20, fontWeight: 800, color: 'var(--white)',
           }}>✓</div>
           <div>
-            <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: '-0.02em' }}>CompliantBharat</div>
-            <div style={{ fontSize: 10, color: T.sub, letterSpacing: '0.04em' }}>COMPLIANCE OS</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-strong)' }}>CompliantBharat</div>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>COMPLIANCE OS</div>
           </div>
         </div>
 
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 20, padding: '8px 24px',
-          background: T.navy, borderRadius: 30, color: T.cream,
-        }}>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
           <button onClick={onViewRoadmap} style={{
-            background: 'transparent', border: 'none', color: 'inherit',
-            fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: 0.8,
+            background: 'transparent', border: 'none', color: 'var(--text-body)',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer',
           }}>Platform Vision</button>
           <button onClick={onViewAviation} style={{
-            background: 'transparent', border: 'none', color: 'inherit',
-            fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: 0.8,
-          }}>Aviation Demo</button>
+            background: 'transparent', border: 'none', color: 'var(--text-body)',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer',
+          }}>Aviation</button>
           <button onClick={onViewChecklists} style={{
-            background: 'transparent', border: 'none', color: 'inherit',
-            fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: 0.8,
+            background: 'transparent', border: 'none', color: 'var(--text-body)',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer',
           }}>Checklists</button>
-          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.2)' }} />
+          <div style={{ width: 1, height: 20, background: 'var(--border-hairline)' }} />
           <button onClick={onToggleDark} style={{
-            background: 'transparent', border: 'none', color: 'inherit',
+            background: 'transparent', border: 'none', color: 'var(--text-body)',
             fontSize: 16, cursor: 'pointer', padding: 0,
           }}>{dark ? '☀️' : '🌙'}</button>
         </div>
       </nav>
 
       {/* ─── HERO SECTION ─── */}
-      <section style={{
-        padding: '80px 6% 100px',
-        maxWidth: 1400, margin: '0 auto',
-      }}>
-        <div style={{ maxWidth: 700, marginBottom: 60 }}>
-          <div style={{
-            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
-            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
-          }}>India's Compliance OS</div>
+      <header style={{ background: heroBg }}>
+        <div style={{
+          maxWidth: 1200, margin: '0 auto', padding: '84px 40px 64px',
+          display: 'grid', gridTemplateColumns: dark ? '1.1fr 0.9fr' : '1fr',
+          gap: 56, alignItems: 'center',
+        }}>
+          <div>
+            {/* Eyebrow */}
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '6px 14px', borderRadius: 'var(--radius-pill)',
+              background: dark ? 'rgba(59,130,246,0.16)' : 'var(--blue-100)',
+              marginBottom: 22,
+            }}>
+              <span style={{
+                width: 7, height: 7, borderRadius: '50%',
+                background: 'var(--green-300)',
+                boxShadow: '0 0 6px var(--green-300)',
+              }} />
+              <span style={{
+                fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 600,
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                color: dark ? 'var(--blue-200)' : 'var(--navy-500)',
+              }}>India's First Unified Platform</span>
+            </div>
 
-          <h1 style={{
-            fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 800,
-            lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.03em',
-            color: T.text,
-          }}>Unify regulatory, standards, and gold compliance</h1>
+            {/* Headline */}
+            <h1 style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 56,
+              lineHeight: 1.08, color: heroText, margin: '0 0 20px',
+              letterSpacing: '-0.03em',
+            }}>
+              Compliance, unified into<br />
+              <span style={{ color: heroAccent }}>one clear dashboard</span>
+            </h1>
 
-          <p style={{
-            fontSize: 18, color: T.sub, lineHeight: 1.7,
-            marginBottom: 32, maxWidth: 500,
-          }}>50+ regulators. 18 sectors. 2,000+ obligations. One unified dashboard that puts every compliance requirement where it needs to be.</p>
+            {/* Subheading */}
+            <p style={{
+              fontSize: 18, lineHeight: 1.55, color: heroSub,
+              maxWidth: 540, margin: '0 0 30px',
+            }}>
+              The first platform that unifies <strong>Regulatory + Standards + Gold</strong> compliance for every Indian business.
+            </p>
 
-          <div style={{ display: 'flex', gap: 16 }}>
-            <button style={{
-              padding: '14px 32px', fontSize: 14, fontWeight: 600,
-              background: T.sage, color: T.white, border: 'none',
-              borderRadius: 8, cursor: 'pointer', letterSpacing: '0.02em',
-            }}>Explore Platform</button>
-            <button style={{
-              padding: '14px 32px', fontSize: 14, fontWeight: 600,
-              background: T.white, color: T.navy, border: `1px solid ${T.border}`,
-              borderRadius: 8, cursor: 'pointer', letterSpacing: '0.02em',
-            }}>Request Demo</button>
+            {/* CTA Buttons */}
+            <div style={{ display: 'flex', gap: 12 }}>
+              <Button variant={dark ? 'primary' : 'primary'} size="lg">
+                Book a demo →
+              </Button>
+              <Button variant={dark ? 'dark' : 'secondary'} size="lg">
+                {dark ? 'See sectors' : 'See how it works'}
+              </Button>
+            </div>
           </div>
+
+          {/* Cockpit Preview (dark mode only) */}
+          {dark && (
+            <div style={{
+              background: 'var(--navy-700)', border: '1px solid var(--navy-600)',
+              borderRadius: 'var(--radius-lg)', padding: 18,
+              boxShadow: 'var(--shadow-lg)',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                <span style={{
+                  width: 8, height: 8, borderRadius: '50%',
+                  background: 'var(--green-300)',
+                  boxShadow: '0 0 6px var(--green-300)',
+                }} />
+                <span style={{
+                  fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600,
+                  letterSpacing: '0.12em', color: 'var(--blue-200)',
+                }}>LIVE · ALL SECTORS</span>
+                <span style={{
+                  marginLeft: 'auto', fontFamily: 'var(--font-mono)',
+                  fontSize: 11, color: 'var(--ink-300)',
+                }}>1,500+ obligations</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {[
+                  ['aviation', 'BCAS-AEP-11', 'stop'],
+                  ['finance', 'RBI-KYC-07', 'caution'],
+                  ['healthcare', 'NABH-3.2', 'clear'],
+                  ['it', 'CERT-IN-06', 'caution'],
+                ].map(([sector, code, status]) => {
+                  const s = SECTORS[sector]
+                  const dot = { clear: 'var(--green-300)', caution: 'var(--amber-500)', stop: 'var(--red-500)' }[status]
+                  return (
+                    <div key={code} style={{
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      background: 'rgba(255,255,255,0.04)', borderRadius: 'var(--radius-sm)',
+                      padding: '10px 12px', borderLeft: `3px solid ${s.color}`,
+                    }}>
+                      <span style={{
+                        width: 8, height: 8, borderRadius: '50%',
+                        background: dot, flex: 'none',
+                      }} />
+                      <span style={{
+                        fontFamily: 'var(--font-mono)', fontSize: 12,
+                        color: 'var(--cloud-50)',
+                      }}>{code}</span>
+                      <span style={{
+                        marginLeft: 'auto', fontFamily: 'var(--font-sans)',
+                        fontSize: 11, fontWeight: 600, color: s.color,
+                        textTransform: 'capitalize',
+                      }}>{sector}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Key Stats */}
+        {/* Stats Bar */}
         <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          gap: 24, marginTop: 60,
+          borderTop: `1px solid ${dark ? 'rgba(255,255,255,0.12)' : 'var(--border-hairline)'}`,
+          padding: '28px 40px',
+          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: 40, textAlign: 'center',
         }}>
           {[
             { num: '50+', label: 'Regulators' },
-            { num: '18', label: 'Sectors' },
-            { num: '2,000+', label: 'Obligations' },
+            { num: '11', label: 'Sectors' },
+            { num: '1,500+', label: 'Obligations' },
             { num: '4', label: 'Delivery Models' },
           ].map((stat, i) => (
-            <div key={i} style={{
-              padding: '24px', background: T.white, borderRadius: 12,
-              border: `1px solid ${T.border}`, textAlign: 'center',
-            }}>
-              <div style={{ fontSize: 32, fontWeight: 800, color: T.sage, marginBottom: 8 }}>{stat.num}</div>
-              <div style={{ fontSize: 12, color: T.sub, letterSpacing: '0.03em', fontWeight: 500 }}>{stat.label}</div>
+            <div key={i}>
+              <div style={{
+                fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 28,
+                color: heroAccent, marginBottom: 4,
+              }}>{stat.num}</div>
+              <div className="cb-label" style={{ color: 'var(--text-muted)' }}>
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>
-      </section>
+      </header>
 
-      {/* ─── THE PROBLEM ─── */}
-      <section style={{
-        padding: '80px 6%',
-        background: T.dark, color: T.cream,
-      }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+      {/* ─── SECTORS SECTION ─── */}
+      <section style={{ padding: '60px 40px', background: dark ? 'var(--navy-800)' : 'var(--surface-app)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{
+              fontSize: 12, fontWeight: 600, letterSpacing: '0.08em',
+              textTransform: 'uppercase', color: 'var(--navy-500)',
+              marginBottom: 16,
+            }}>Coverage</div>
+            <h2 style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 40,
+              color: 'var(--text-strong)', letterSpacing: '-0.02em',
+            }}>Every Indian sector. Every regulator.</h2>
+          </div>
+
           <div style={{
-            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
-            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
-          }}>The Challenge</div>
-
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800,
-            lineHeight: 1.15, marginBottom: 48, letterSpacing: '-0.02em',
-          }}>Compliance is fragmented across tools, teams, and time</h2>
-
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 32, marginBottom: 48,
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+            gap: 12,
           }}>
-            {[
-              {
-                icon: '📊',
-                title: 'Spreadsheet Chaos',
-                desc: 'Tracked across Excel, emails, WhatsApp, and paper registers. One missed deadline = fine.',
-              },
-              {
-                icon: '⏰',
-                title: 'Missed Deadlines',
-                desc: 'EPFO by 25th. ESIC by 15th. CERT-In in 6 hours. No single system alerts you.',
-              },
-              {
-                icon: '💼',
-                title: 'Fragmented Experts',
-                desc: 'Separate consultant for ISO, another for NABH, another for BCAS. Expensive and uncoordinated.',
-              },
-              {
-                icon: '🚨',
-                title: 'Audit Anxiety',
-                desc: 'Inspections come unannounced. Evidence scattered. Panic mode every time.',
-              },
-            ].map((item, i) => (
-              <div key={i} style={{
-                padding: '28px', background: `rgba(255,255,255,0.05)`,
-                borderRadius: 12, border: `1px solid ${T.border}`,
-              }}>
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{item.icon}</div>
-                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 10 }}>{item.title}</div>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{item.desc}</p>
-              </div>
+            {Object.keys(SECTORS).map(key => (
+              <SectorTag key={key} sector={key} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── THE SOLUTION ─── */}
-      <section style={{
-        padding: '80px 6%',
-        background: T.bg,
-      }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-          <div style={{
-            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
-            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
-          }}>The Solution</div>
-
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800,
-            lineHeight: 1.15, marginBottom: 60, letterSpacing: '-0.02em',
-          }}>Three layers. One platform. Complete clarity.</h2>
+      {/* ─── COMPLIANCE LAYERS ─── */}
+      <section style={{ padding: '60px 40px', background: dark ? 'var(--navy-900)' : 'var(--white)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{
+              fontSize: 12, fontWeight: 600, letterSpacing: '0.08em',
+              textTransform: 'uppercase', color: 'var(--navy-500)',
+              marginBottom: 16,
+            }}>Three Layers</div>
+            <h2 style={{
+              fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 40,
+              color: 'var(--text-strong)', letterSpacing: '-0.02em',
+            }}>Regulatory + Standards + Gold</h2>
+          </div>
 
           <div style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -210,134 +247,97 @@ export default function Landing({ dark = false, onToggleDark, onViewRoadmap, onV
           }}>
             {[
               {
-                color: T.red,
-                layer: 'Layer 1',
-                title: 'Regulatory',
-                subtitle: 'Mandatory — Non-negotiable',
-                desc: 'Every law, circular, and order from 50+ regulators. MUST comply or face fines, licence suspension, criminal liability.',
+                icon: '⚖️', color: 'var(--red-500)',
+                title: 'Regulatory', subtitle: 'Mandatory',
+                desc: 'Every law, rule, circular from 50+ regulators. Must comply or face fines, licence suspension.',
               },
               {
-                color: T.blue,
-                layer: 'Layer 2',
-                title: 'Standards',
-                subtitle: 'Competitive Advantage',
-                desc: 'BIS, ISO, NABH, NABL standards. Required for contracts, export markets, insurance empanelment, government procurement.',
+                icon: '🏅', color: 'var(--navy-500)',
+                title: 'Standards', subtitle: 'Quality Markers',
+                desc: 'BIS, ISO, NABH standards. Required for contracts, export, insurance empanelment.',
               },
               {
-                color: T.gold,
-                layer: 'Layer 3',
-                title: 'Gold',
-                subtitle: 'World-Class Excellence',
-                desc: 'ACI Level 4, CMMI Level 5, SA8000, JCI. World-class benchmarks that attract premium clients and foreign investment.',
+                icon: '🏆', color: 'var(--amber-500)',
+                title: 'Gold', subtitle: 'Excellence',
+                desc: 'ACI Level 4, CMMI Level 5, SA8000. World-class benchmarks that attract premium clients.',
               },
             ].map((item, i) => (
-              <div key={i} style={{
-                padding: '32px', background: T.white, borderRadius: 12,
-                border: `2px solid ${item.color}`, borderLeft: `6px solid ${item.color}`,
+              <Card key={i} interactive style={{
+                borderLeft: `4px solid ${item.color}`,
+                padding: 'var(--space-7)',
               }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: item.color, letterSpacing: '0.04em', marginBottom: 8 }}>{item.layer}</div>
-                <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>{item.title}</div>
-                <div style={{ fontSize: 12, color: T.sub, marginBottom: 16 }}>{item.subtitle}</div>
-                <p style={{ fontSize: 14, color: T.sub, lineHeight: 1.7 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTORS ─── */}
-      <section style={{
-        padding: '80px 6%',
-        background: T.dark, color: T.cream,
-      }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div style={{
-              fontSize: 13, letterSpacing: '0.08em', color: T.sage,
-              fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
-            }}>Coverage</div>
-            <h2 style={{
-              fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800,
-              lineHeight: 1.15, letterSpacing: '-0.02em',
-            }}>Every Indian sector. Every regulator.</h2>
-          </div>
-
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-            gap: 16,
-          }}>
-            {sectors.map((sector, i) => (
-              <div key={i} style={{
-                padding: '24px 16px', background: `rgba(255,255,255,0.05)`,
-                borderRadius: 12, textAlign: 'center', border: `1px solid ${T.border}`,
-              }}>
-                <div style={{ fontSize: 24, marginBottom: 8 }}>{sector.icon}</div>
-                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4, lineHeight: 1.3 }}>{sector.name}</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>{sector.count} items</div>
-              </div>
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{item.icon}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: item.color, marginBottom: 4 }}>
+                  {item.title}
+                </div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-strong)', marginBottom: 8 }}>
+                  {item.title}
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                  {item.desc}
+                </div>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* ─── CTA SECTION ─── */}
-      <section style={{
-        padding: '80px 6%',
-        background: T.bg,
-      }}>
+      <section style={{ padding: '60px 40px', background: dark ? 'var(--navy-800)' : 'var(--surface-app)' }}>
         <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
           <div style={{
-            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
-            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
+            fontSize: 12, fontWeight: 600, letterSpacing: '0.08em',
+            textTransform: 'uppercase', color: 'var(--navy-500)',
+            marginBottom: 16,
           }}>Early Access</div>
-
           <h2 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800,
-            lineHeight: 1.2, marginBottom: 24, letterSpacing: '-0.02em',
-          }}>Get early access to build with us</h2>
-
+            fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 36,
+            color: 'var(--text-strong)', letterSpacing: '-0.02em', marginBottom: 16,
+          }}>Get early access</h2>
           <p style={{
-            fontSize: 16, color: T.sub, lineHeight: 1.7,
+            fontSize: 16, color: 'var(--text-secondary)', lineHeight: 1.6,
             marginBottom: 32,
-          }}>Be first to know when we launch. Shape the future of compliance for India.</p>
+          }}>Be first to know when we launch. No spam, ever.</p>
 
-          <div style={{ display: 'flex', gap: 12, maxWidth: 400, margin: '0 auto' }}>
+          <div style={{ display: 'flex', gap: 8, maxWidth: 400, margin: '0 auto' }}>
             <input
               type="email"
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={{
-                flex: 1, padding: '12px 16px', borderRadius: 8,
-                border: `1px solid ${T.border}`, background: T.white,
-                fontSize: 14, color: T.text, outline: 'none',
+                flex: 1, padding: 'var(--space-5)', borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--border-hairline)', background: 'var(--surface-card)',
+                fontFamily: 'var(--font-sans)', fontSize: 14, color: 'var(--text-body)',
+                outline: 'none',
               }}
             />
-            <button
+            <Button
+              variant="primary"
               onClick={() => { setSubmitted(true); setTimeout(() => setEmail(''), 1500) }}
-              style={{
-                padding: '12px 24px', background: T.sage, color: T.white,
-                border: 'none', borderRadius: 8, fontWeight: 600,
-                cursor: 'pointer', fontSize: 14, letterSpacing: '0.02em',
-              }}
             >
-              {submitted ? '✓ Joined' : 'Join Waitlist'}
-            </button>
+              {submitted ? '✓' : 'Join'}
+            </Button>
           </div>
         </div>
       </section>
 
       {/* ─── FOOTER ─── */}
       <footer style={{
-        padding: '40px 6%', borderTop: `1px solid ${T.border}`,
-        textAlign: 'center', color: T.sub, fontSize: 12,
+        padding: '40px',
+        borderTop: '1px solid var(--border-hairline)',
+        textAlign: 'center',
+        color: 'var(--text-muted)',
+        fontSize: 12,
       }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-          <div style={{ fontWeight: 600, marginBottom: 8 }}>CompliantBharat</div>
-          <div style={{ fontSize: 11, letterSpacing: '0.03em' }}>
-            India's National Compliance Intelligence Platform · Building for 2026
-          </div>
-          <div style={{ marginTop: 12, fontSize: 11 }}>Regulatory · Standards · Gold · One Platform.</div>
+        <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--text-body)' }}>
+          CompliantBharat
+        </div>
+        <div style={{ fontSize: 11, letterSpacing: '0.03em' }}>
+          India's National Compliance Intelligence Platform · Building for 2026
+        </div>
+        <div style={{ marginTop: 12, fontSize: 11 }}>
+          Regulatory · Standards · Gold · One Platform.
         </div>
       </footer>
     </div>
