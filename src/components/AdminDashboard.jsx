@@ -464,7 +464,7 @@ export default function AdminDashboard({ dark = false }) {
               <div style={{ display: 'flex', gap: 6 }}>
                 {[['all','All'],['compliant','Compliant'],['nc','NC'],['ofi','OFI'],['info','Info']].map(([v,l]) => (
                   <button key={v} onClick={() => setAuditFilter(v)} style={{
-                    padding: '7px 14px', borderRadius: 8, fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer',
+                    padding: '7px 14px', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer',
                     background: auditFilter === v ? '#3B82F6' : T.card,
                     color: auditFilter === v ? '#fff' : T.sub,
                     border: `1px solid ${auditFilter === v ? '#3B82F6' : T.border}`,
