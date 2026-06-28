@@ -109,10 +109,12 @@ export default function Landing({ dark = false, onToggleDark, onViewRoadmap, onV
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
           <div style={{
             width: 38, height: 38, borderRadius: 10, flexShrink: 0,
-            background: `linear-gradient(135deg, ${T.blue}, ${T.navy})`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
-            border: `1px solid ${T.border}`,
-          }}>🇮🇳</div>
+            background: T.navy500,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
+            border: `1px solid ${T.navy800}`,
+            color: T.surface,
+            fontWeight: 800,
+          }}>✓</div>
           <div>
             <div style={{ fontSize: 16, fontWeight: 800, color: T.text, letterSpacing: '-0.02em', lineHeight: 1, whiteSpace: 'nowrap' }}>CompliantBharat</div>
             <div style={{ fontSize: 9, color: T.muted, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>India's Compliance OS</div>

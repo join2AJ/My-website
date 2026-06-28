@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { LIGHT, DARK } from '../themes.js'
 import { regulatoryItems, standards, counts, regulatoryScore, standardsScore, departments } from '../data/aviationData.js'
 
-let T = { ...DARK, amber: DARK.gold }
-
 const TOP_NAVS = [
   { id:'overview',    icon:'📊', label:'Overview'    },
   { id:'compliance',  icon:'⚖️', label:'Compliance'  },
@@ -11,7 +9,7 @@ const TOP_NAVS = [
   { id:'standards',   icon:'🏅', label:'Standards'   },
 ]
 
-const Card = ({ children, style = {} }) => (
+const Card = ({ children, style = {}, T }) => (
   <div style={{
     background: T.surface, borderRadius: 16, padding: 16,
     border: `1px solid ${T.border}`, ...style,
@@ -29,7 +27,7 @@ const Pill = ({ label, color, bg }) => (
   }}>{label}</span>
 )
 
-const Sub = ({ children, mt = 12 }) => (
+const Sub = ({ children, mt = 12, T }) => (
   <div style={{
     fontSize: 10, color: T.muted, textTransform: 'uppercase',
     letterSpacing: '0.1em', marginBottom: 6, marginTop: mt,
@@ -51,7 +49,7 @@ function StatusBadge({ status, STATUS }) {
   )
 }
 
-function NavBtn({ active, color = T.blue, onClick, children }) {
+function NavBtn({ active, color, onClick, children, T }) {
   return (
     <button onClick={onClick} style={{
       padding: '7px 16px', borderRadius: 8, fontSize: 11, fontWeight: 600,
@@ -63,10 +61,10 @@ function NavBtn({ active, color = T.blue, onClick, children }) {
   )
 }
 
-function ComplianceCard({ item, highlight, STATUS, PRIORITY }) {
+function ComplianceCard({ item, highlight, STATUS, PRIORITY, T }) {
   const [open, setOpen] = useState(false)
   return (
-    <Card style={{
+    <Card T={T} style={{
       borderLeft: `4px solid ${item.regulatorColor}`,
       background: highlight ? T.goldL : T.surface,
     }}>
@@ -117,19 +115,19 @@ function ComplianceCard({ item, highlight, STATUS, PRIORITY }) {
         <div style={{ marginTop: 12, borderTop: `1px solid ${T.border}`, paddingTop: 14 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 4 }}>
             <div>
-              <Sub mt={0}>Due Date</Sub>
+              <Sub T={T} mt={0}>Due Date</Sub>
               <div style={{
                 fontSize: 12, fontWeight: 700, fontFamily: 'monospace',
                 color: item.status === 'overdue' ? T.red : T.amber,
               }}>{item.dueDate}</div>
             </div>
             <div>
-              <Sub mt={0}>Reference</Sub>
+              <Sub T={T} mt={0}>Reference</Sub>
               <div style={{ fontSize: 11, color: T.sub, lineHeight: 1.5, fontFamily: 'monospace' }}>{item.reference}</div>
             </div>
           </div>
 
-          <Sub>Evidence Required</Sub>
+          <Sub T={T}>Evidence Required</Sub>
           <div style={{ marginBottom: 4 }}>
             {item.evidence.map((e, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 5 }}>
@@ -139,7 +137,7 @@ function ComplianceCard({ item, highlight, STATUS, PRIORITY }) {
             ))}
           </div>
 
-          <Sub>Actions</Sub>
+          <Sub T={T}>Actions</Sub>
           <div style={{ marginBottom: 4 }}>
             {item.actions.map((a, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 5 }}>
@@ -175,7 +173,7 @@ function ComplianceCard({ item, highlight, STATUS, PRIORITY }) {
 
 export default function AviationApp({ dark = false }) {
   const theme = dark ? DARK : LIGHT
-  T = { ...theme, amber: theme.gold }
+  const T = { ...theme, amber: theme.gold }
 
   const STATUS = {
     compliant: { label:'Compliant', color:T.green,  bg:T.greenL  },
@@ -267,7 +265,7 @@ export default function AviationApp({ dark = false }) {
         background: T.surface, borderBottom: `1px solid ${T.border}`,
       }}>
         {TOP_NAVS.map(({ id, icon, label }) => (
-          <NavBtn key={id} active={nav === id} onClick={() => setNav(id)}>
+          <NavBtn T={T} key={id} active={nav === id} onClick={() => setNav(id)}>
             {icon} {label}
           </NavBtn>
         ))}
@@ -321,8 +319,8 @@ export default function AviationApp({ dark = false }) {
               ].map(({ label, score }) => {
                 const c = score >= 80 ? T.green : score >= 60 ? T.gold : T.red
                 return (
-                  <Card key={label}>
-                    <Sub mt={0}>{label}</Sub>
+                  <Card T={T} key={label}>
+                    <Sub T={T} mt={0}>{label}</Sub>
                     <div style={{ fontSize: 30, fontWeight: 900, color: c, lineHeight: 1, marginBottom: 10, fontFamily: 'monospace' }}>
                       {score}%
                     </div>
@@ -335,9 +333,9 @@ export default function AviationApp({ dark = false }) {
             </div>
 
             {/* Departments at risk */}
-            <Sub mt={0}>Departments at Risk</Sub>
+            <Sub T={T} mt={0}>Departments at Risk</Sub>
             {deptItemCounts.filter(d => d.overdue > 0 || d.gap > 0).map(d => (
-              <Card key={d.id} style={{
+              <Card T={T} key={d.id} style={{
                 marginBottom: 8, cursor: 'pointer',
                 borderLeft: `4px solid ${d.overdue > 0 ? T.red : T.accent}`,
               }} onClick={() => { setDept(d.id); setNav('compliance') }}>
@@ -358,7 +356,7 @@ export default function AviationApp({ dark = false }) {
 
             {/* All-clear departments */}
             {deptItemCounts.some(d => d.overdue === 0 && d.gap === 0 && d.total > 0) && (
-              <Card style={{ marginTop: 4, background: T.greenL, border: `1px solid ${T.green}22` }}>
+              <Card T={T} style={{ marginTop: 4, background: T.greenL, border: `1px solid ${T.green}22` }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: T.green, marginBottom: 8, fontFamily: 'monospace' }}>
                   ✓ RUNWAY CLEAR — NO OVERDUE OR GAPS
                 </div>
@@ -385,9 +383,9 @@ export default function AviationApp({ dark = false }) {
             </div>
             <div style={{ overflowX: 'auto', marginBottom: 12, paddingBottom: 4 }}>
               <div style={{ display: 'flex', gap: 6, width: 'max-content' }}>
-                <NavBtn active={!dept} color={T.blue} onClick={() => setDept(null)}>All</NavBtn>
+                <NavBtn T={T} active={!dept} color={T.blue} onClick={() => setDept(null)}>All</NavBtn>
                 {departments.map(d => (
-                  <NavBtn key={d.id} active={dept === d.id} color={d.color}
+                  <NavBtn T={T} key={d.id} active={dept === d.id} color={d.color}
                     onClick={() => setDept(dept === d.id ? null : d.id)}>
                     {d.icon} {d.name}
                   </NavBtn>
@@ -400,7 +398,7 @@ export default function AviationApp({ dark = false }) {
             </div>
             <div style={{ display: 'flex', gap: 6, marginBottom: 14, flexWrap: 'wrap' }}>
               {['all', 'compliant', 'due', 'overdue', 'gap'].map(s => (
-                <NavBtn key={s}
+                <NavBtn T={T} key={s}
                   active={statusFilter === s}
                   color={s === 'all' ? T.blue : STATUS[s].color}
                   onClick={() => setStatusFilter(s)}>
@@ -444,7 +442,7 @@ export default function AviationApp({ dark = false }) {
                 : (
                   <div className="compliance-grid">
                     {filteredItems.map(item => (
-                      <ComplianceCard key={item.id} item={item} highlight={!!dept} STATUS={STATUS} PRIORITY={PRIORITY} />
+                      <ComplianceCard T={T} key={item.id} item={item} highlight={!!dept} STATUS={STATUS} PRIORITY={PRIORITY} />
                     ))}
                   </div>
                 )
@@ -589,7 +587,7 @@ export default function AviationApp({ dark = false }) {
               {standards.length} ISO/industry standards — certification status and gap analysis.
             </div>
             {standards.map(s => (
-              <Card key={s.id} style={{ marginBottom: 14, borderLeft: `4px solid ${s.color}` }}>
+              <Card T={T} key={s.id} style={{ marginBottom: 14, borderLeft: `4px solid ${s.color}` }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 12 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 14, fontWeight: 800, color: T.text }}>{s.name}</div>
@@ -634,7 +632,7 @@ export default function AviationApp({ dark = false }) {
 
                 {!s.validUntil && (
                   <>
-                    <Sub mt={0}>Certification Body</Sub>
+                    <Sub T={T} mt={0}>Certification Body</Sub>
                     <div style={{ fontSize: 11, color: T.sub, marginBottom: 4 }}>{s.certBody}</div>
                   </>
                 )}
