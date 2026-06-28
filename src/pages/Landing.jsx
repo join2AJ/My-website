@@ -1,402 +1,343 @@
 import { useState } from 'react'
 import { LIGHT, DARK } from '../themes.js'
 
-function Stat({ num, label, T }) {
-  return (
-    <div style={{ textAlign: 'center', flex: 1, minWidth: 80 }}>
-      <div style={{ fontSize: 28, fontWeight: 900, color: T.gold, letterSpacing: '-0.03em', fontFamily: 'monospace' }}>{num}</div>
-      <div style={{ fontSize: 11, color: T.muted, marginTop: 2, letterSpacing: '0.04em' }}>{label}</div>
-    </div>
-  )
-}
-
 export default function Landing({ dark = false, onToggleDark, onViewRoadmap, onViewAviation, onViewChecklists, onViewAdmin }) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
-
   const T = dark ? DARK : LIGHT
 
   const sectors = [
-    { icon:'🏦', name:'Finance & Banking',   color:T.red,    count:'200+', reg:'SEBI · RBI · IRDAI' },
-    { icon:'✈️', name:'Aviation',            color:T.blue,   count:'150+', reg:'DGCA · AAI · BCAS' },
-    { icon:'🏥', name:'Healthcare',          color:T.purple, count:'180+', reg:'NMC · NABH · CPCB' },
-    { icon:'🏭', name:'Manufacturing',       color:T.teal,   count:'250+', reg:'BIS · DPIIT · MSME' },
-    { icon:'🌾', name:'Food & Agriculture',  color:T.green,  count:'120+', reg:'FSSAI · APEDA · AGMARK' },
-    { icon:'💻', name:'IT / Technology',     color:T.blue,   count:'80+',  reg:'MeitY · CERT-In · TRAI' },
-    { icon:'⚡', name:'Energy & Power',      color:T.gold,   count:'130+', reg:'CERC · BEE · MNRE' },
-    { icon:'🎓', name:'Education',           color:T.purple, count:'90+',  reg:'UGC · AICTE · NCTE' },
-    { icon:'💊', name:'Pharma & Chemicals',  color:T.teal,   count:'160+', reg:'CDSCO · DCGI · MSIHC' },
-    { icon:'🛢️', name:'Oil & Gas',           color:T.accent, count:'140+', reg:'PNGRB · OISD · MoPNG' },
-    { icon:'📡', name:'Telecom',             color:T.blue,   count:'100+', reg:'TRAI · DOT · WPC' },
-    { icon:'🏗️', name:'Real Estate',         color:T.gold,   count:'110+', reg:'RERA · NBC · MoHUA' },
-    { icon:'🚢', name:'Maritime & Ports',    color:T.teal,   count:'120+', reg:'DG Shipping · TAMP' },
-    { icon:'🛡️', name:'Insurance',           color:T.red,    count:'100+', reg:'IRDAI · GIC · LIC Reg' },
-    { icon:'🚛', name:'Logistics',           color:T.muted,  count:'90+',  reg:'MoRTH · DGMS · MSME' },
-    { icon:'📺', name:'Media & OTT',         color:T.purple, count:'70+',  reg:'MIB · TRAI · MEITY' },
-    { icon:'🛒', name:'Retail & E-Commerce', color:T.green,  count:'80+',  reg:'CCPA · BIS · MCA' },
-    { icon:'🏢', name:'Universal / MSME',    color:T.muted,  count:'60+',  reg:'MSME · Startup India' },
+    { icon:'🏦', name:'Finance & Banking', count:'200+' },
+    { icon:'✈️', name:'Aviation', count:'150+' },
+    { icon:'🏥', name:'Healthcare', count:'180+' },
+    { icon:'🏭', name:'Manufacturing', count:'250+' },
+    { icon:'🌾', name:'Food & Agri', count:'120+' },
+    { icon:'💻', name:'IT / Tech', count:'80+' },
+    { icon:'⚡', name:'Energy', count:'130+' },
+    { icon:'🎓', name:'Education', count:'90+' },
+    { icon:'💊', name:'Pharma', count:'160+' },
+    { icon:'🛢️', name:'Oil & Gas', count:'140+' },
+    { icon:'📡', name:'Telecom', count:'100+' },
+    { icon:'🏗️', name:'Real Estate', count:'110+' },
+    { icon:'🚢', name:'Maritime', count:'120+' },
+    { icon:'🛡️', name:'Insurance', count:'100+' },
+    { icon:'🚛', name:'Logistics', count:'90+' },
+    { icon:'📺', name:'Media & OTT', count:'70+' },
+    { icon:'🛒', name:'Retail', count:'80+' },
+    { icon:'🏢', name:'MSME', count:'60+' },
   ]
-
-  const buildingNow = [
-    {
-      phase: 'Phase 1 — Building Now',
-      color: T.blue, bg: T.blueL,
-      badge: '🔨 In Progress',
-      items: [
-        { name: 'ComplianceOS Core', desc: 'Compliance calendar, task tracking, deadline alerts across all 3 layers' },
-        { name: 'Evidence Vault', desc: 'Tamper-proof document storage with AI auto-tagging and version control' },
-        { name: 'ComplianceScore™', desc: 'Three-dimensional score: Regulatory / Standards / Gold — board-ready dashboard' },
-        { name: 'Circular Intelligence Engine', desc: 'Auto-monitors 50+ regulator portals daily, creates tasks on new circulars' },
-      ],
-    },
-    {
-      phase: 'Phase 2 — Coming Next',
-      color: T.green, bg: T.greenL,
-      badge: '📋 Planned',
-      items: [
-        { name: 'GapAI', desc: 'Upload any document → Claude AI maps gaps to regulatory controls in seconds' },
-        { name: 'AuditWorkspace', desc: 'Multi-client dashboard for CA firms and ISO certification bodies' },
-        { name: 'ReportForge', desc: 'One-click audit reports in BCAS / DGCA / NABH / ISO / SEBI formats' },
-        { name: 'PolicyGen AI', desc: 'Describe your company → get fully drafted ISO 27001 policies and DPDPA notices' },
-      ],
-    },
-    {
-      phase: 'Phase 3 — Future',
-      color: T.purple, bg: T.purpleL,
-      badge: '🔭 Roadmap',
-      items: [
-        { name: 'ConsultantMarketplace', desc: 'Verified ISO consultants and CA firms — browse, compare, book' },
-        { name: 'ComplianceScore API', desc: 'Banks and PE firms query vendor compliance scores for due diligence' },
-        { name: 'AuditCopilot AI', desc: 'GitHub Copilot for auditors — highlights anomalies, suggests follow-ups' },
-        { name: 'VirtualCISO', desc: 'Senior security expert embedded part-time, manages auditors and regulators' },
-      ],
-    },
-    {
-      phase: 'Phase 4 — Scale',
-      color: T.gold, bg: T.goldL,
-      badge: '🏛️ Enterprise',
-      items: [
-        { name: 'RegulatorDashboard', desc: 'SEBI sees all 5,000 brokers\' scores. BCAS sees all 157 airports. Real-time.' },
-        { name: 'StateGovPortal', desc: 'White-labelled state government portals — one MoU brings 50,000 MSMEs onboard' },
-        { name: 'InspectionQueue AI', desc: 'AI prioritises which entities to inspect next based on scores and history' },
-        { name: 'InsuranceConnect', desc: 'High compliance score = lower cyber insurance premium. Referral marketplace.' },
-      ],
-    },
-  ]
-
-  const btnPrimary = {
-    padding: '13px 28px', borderRadius: 50, border: 'none', cursor: 'pointer',
-    background: `linear-gradient(135deg, ${T.gold}, ${T.accent})`,
-    color: '#fff', fontSize: 14, fontWeight: 700,
-    boxShadow: `0 4px 20px ${T.gold}44`, letterSpacing: '-0.01em',
-  }
-  const btnOutline = {
-    padding: '13px 28px', borderRadius: 50, cursor: 'pointer',
-    background: T.blueL, color: T.text, border: `1.5px solid ${T.border}`,
-    fontSize: 14, fontWeight: 600,
-  }
 
   return (
-    <div style={{ background: T.bg, minHeight: '100vh', color: T.text }}>
-
-      {/* ── NAV ── */}
+    <div style={{ background: T.bg, minHeight: '100vh', color: T.text, fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+      {/* ─── NAVIGATION ─── */}
       <nav style={{
-        background: T.surface, borderBottom: `1px solid ${T.border}`,
-        padding: '13px 6%', display: 'flex', alignItems: 'center',
-        justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50,
-        boxShadow: dark ? '0 1px 20px rgba(0,0,0,0.4)' : '0 1px 12px rgba(0,0,0,0.06)',
+        position: 'sticky', top: 0, zIndex: 100,
+        background: `linear-gradient(to bottom, ${T.bg}, ${T.bg}dd)`,
+        backdropFilter: 'blur(12px)',
+        padding: '16px 6%',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        borderBottom: `1px solid ${T.border}`,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{
-            width: 38, height: 38, borderRadius: 10, flexShrink: 0,
-            background: T.navy500,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
-            border: `1px solid ${T.navy800}`,
-            color: T.surface,
-            fontWeight: 800,
+            width: 40, height: 40, borderRadius: 12,
+            background: T.sage, display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            fontSize: 20, fontWeight: 800, color: T.white,
           }}>✓</div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: T.text, letterSpacing: '-0.02em', lineHeight: 1, whiteSpace: 'nowrap' }}>CompliantBharat</div>
-            <div style={{ fontSize: 9, color: T.muted, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>India's Compliance OS</div>
+            <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: '-0.02em' }}>CompliantBharat</div>
+            <div style={{ fontSize: 10, color: T.sub, letterSpacing: '0.04em' }}>COMPLIANCE OS</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexShrink: 1, minWidth: 0, overflow: 'hidden' }}>
-          {onViewAdmin && (
-            <button onClick={onViewAdmin} style={{
-              padding: '7px 14px', borderRadius: 8, background: T.purpleL,
-              color: T.purple, border: `1px solid ${T.purple}33`, fontSize: 12,
-              fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
-            }}>⚙️ Admin</button>
-          )}
-          <button onClick={onViewAviation} style={{
-            padding: '7px 14px', borderRadius: 8, background: T.tealL,
-            color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12,
-            fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
-          }}>✈️ Aviation Demo</button>
-          <button onClick={onViewChecklists} className="nav-hide-sm" style={{
-            padding: '7px 14px', borderRadius: 8, background: T.greenL,
-            color: T.green, border: `1px solid ${T.green}33`, fontSize: 12,
-            fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
-          }}>📋 Checklists</button>
-          <button onClick={onViewRoadmap} className="nav-hide-sm" style={{
-            padding: '7px 14px', borderRadius: 8, background: T.blueL,
-            color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12,
-            fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 20, padding: '8px 24px',
+          background: T.navy, borderRadius: 30, color: T.cream,
+        }}>
+          <button onClick={onViewRoadmap} style={{
+            background: 'transparent', border: 'none', color: 'inherit',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: 0.8,
           }}>Platform Vision</button>
-          <button onClick={onToggleDark} title={dark ? 'Light mode' : 'Dark mode'} style={{
-            width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
-            border: `1px solid ${T.border}`, background: T.card,
-            cursor: 'pointer', fontSize: 15,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          <button onClick={onViewAviation} style={{
+            background: 'transparent', border: 'none', color: 'inherit',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: 0.8,
+          }}>Aviation Demo</button>
+          <button onClick={onViewChecklists} style={{
+            background: 'transparent', border: 'none', color: 'inherit',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: 0.8,
+          }}>Checklists</button>
+          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.2)' }} />
+          <button onClick={onToggleDark} style={{
+            background: 'transparent', border: 'none', color: 'inherit',
+            fontSize: 16, cursor: 'pointer', padding: 0,
           }}>{dark ? '☀️' : '🌙'}</button>
-          <button style={{
-            padding: '7px 14px', borderRadius: 8, border: 'none', cursor: 'pointer',
-            background: `linear-gradient(135deg, ${T.gold}, ${T.accent})`,
-            color: '#fff', fontSize: 12, fontWeight: 600,
-            boxShadow: `0 2px 10px ${T.gold}44`, whiteSpace: 'nowrap',
-          }}>Join Waitlist</button>
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: '64px 6% 52px', maxWidth: 1100, margin: '0 auto' }}>
-        <div className="hero-inner">
+      {/* ─── HERO SECTION ─── */}
+      <section style={{
+        padding: '80px 6% 100px',
+        maxWidth: 1400, margin: '0 auto',
+      }}>
+        <div style={{ maxWidth: 700, marginBottom: 60 }}>
+          <div style={{
+            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
+            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
+          }}>India's Compliance OS</div>
 
-          {/* Left col: badge + headline + description */}
-          <div>
-            {/* Status ticker */}
-            <div style={{
-              fontFamily: 'monospace',
-              background: dark ? '#060F1F' : T.blueL,
-              border: `1px solid ${T.border}`, borderRadius: 8,
-              padding: '8px 14px', marginBottom: 20,
-              fontSize: 10, color: T.gold, letterSpacing: '0.06em',
-              display: 'flex', alignItems: 'center', gap: 8,
-            }}>
-              <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: T.green, flexShrink: 0 }} />
-              COMPLIANCE CLEARANCE: ACTIVE · 18 SECTORS · 50+ REGULATORS · ALL RUNWAYS CLEAR
-            </div>
+          <h1 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 800,
+            lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.03em',
+            color: T.text,
+          }}>Unify regulatory, standards, and gold compliance</h1>
 
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '5px 16px', borderRadius: 8,
-              background: T.blueL, border: `1px solid ${T.blue}33`,
-              color: T.blueM, fontSize: 11, fontWeight: 700, marginBottom: 28, letterSpacing: '0.04em',
-            }}>✈ BUILT FOR INDIA · NOW IN DEVELOPMENT</div>
+          <p style={{
+            fontSize: 18, color: T.sub, lineHeight: 1.7,
+            marginBottom: 32, maxWidth: 500,
+          }}>50+ regulators. 18 sectors. 2,000+ obligations. One unified dashboard that puts every compliance requirement where it needs to be.</p>
 
-            <h1 style={{
-              fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 900, color: T.text,
-              lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 22,
-            }}>
-              India's First<br />
-              <span style={{
-                background: `linear-gradient(135deg, ${T.blueM} 0%, ${T.blue} 100%)`,
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>Compliance<br />Operating System</span>
-            </h1>
-
-            <p style={{ fontSize: 'clamp(14px, 1.8vw, 16px)', color: T.sub, lineHeight: 1.8, marginBottom: 28, maxWidth: 560 }}>
-              The first platform that unifies{' '}
-              <strong style={{ color: T.red }}>Regulatory</strong> +{' '}
-              <strong style={{ color: T.blue }}>Standards</strong> +{' '}
-              <strong style={{ color: T.gold }}>Gold</strong> compliance for every Indian business.
-              50+ regulators. 18 sectors. One dashboard.
-            </p>
+          <div style={{ display: 'flex', gap: 16 }}>
+            <button style={{
+              padding: '14px 32px', fontSize: 14, fontWeight: 600,
+              background: T.sage, color: T.white, border: 'none',
+              borderRadius: 8, cursor: 'pointer', letterSpacing: '0.02em',
+            }}>Explore Platform</button>
+            <button style={{
+              padding: '14px 32px', fontSize: 14, fontWeight: 600,
+              background: T.white, color: T.navy, border: `1px solid ${T.border}`,
+              borderRadius: 8, cursor: 'pointer', letterSpacing: '0.02em',
+            }}>Request Demo</button>
           </div>
-
-          {/* Right col: stats + CTAs */}
-          <div>
-            <div className="hero-stats" style={{ background: T.surface, border: `1px solid ${T.border}` }}>
-              {[['50+','Regulators'],['18','Sectors'],['2,000+','Obligations'],['4','Delivery Models']].map(([n,l], i, arr) => (
-                <div key={l} style={{ flex: 1, borderRight: i < arr.length - 1 ? `1px solid ${T.border}` : 'none' }}>
-                  <Stat num={n} label={l} T={T} />
-                </div>
-              ))}
-            </div>
-            <div className="hero-cta">
-              <button style={btnPrimary} onClick={onViewRoadmap}>Explore Platform Vision →</button>
-              <button style={btnOutline}>Join Early Access</button>
-            </div>
-          </div>
-
         </div>
-      </section>
 
-      {/* ── PROBLEM ── */}
-      <section style={{ padding: '52px 6%', maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.red, letterSpacing: '0.1em', marginBottom: 8 }}>THE PROBLEM</div>
-          <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 10 }}>Today, compliance is chaos</h2>
-          <p style={{ fontSize: 13, color: T.sub, maxWidth: 500, margin: '0 auto' }}>Every Indian business navigates 50+ regulators with no unified system.</p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 14 }}>
+        {/* Key Stats */}
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+          gap: 24, marginTop: 60,
+        }}>
           {[
-            { icon:'📁', title:'Excel & WhatsApp', desc:'Compliance tracked in spreadsheets and paper registers. One missed message = missed deadline = fine.' },
-            { icon:'⏰', title:'Missed Deadlines', desc:'EPFO by 25th. ESIC by 15th. CERT-In in 6 hours. No system alerts you. Fines arrive before awareness.' },
-            { icon:'💸', title:'Fragmented Consultants', desc:'Separate consultant for ISO, another for NABH, another for BCAS. Expensive, siloed, uncoordinated.' },
-            { icon:'😰', title:'Audit Anxiety', desc:'Inspections come unannounced. Evidence scattered across drives and WhatsApp. Panic mode every time.' },
-          ].map(p => (
-            <div key={p.title} style={{ background: T.surface, borderRadius: 14, padding: '20px 18px', border: `1px solid ${T.border}` }}>
-              <div style={{ fontSize: 30, marginBottom: 12 }}>{p.icon}</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: T.text, marginBottom: 7 }}>{p.title}</div>
-              <div style={{ fontSize: 12, color: T.sub, lineHeight: 1.65 }}>{p.desc}</div>
+            { num: '50+', label: 'Regulators' },
+            { num: '18', label: 'Sectors' },
+            { num: '2,000+', label: 'Obligations' },
+            { num: '4', label: 'Delivery Models' },
+          ].map((stat, i) => (
+            <div key={i} style={{
+              padding: '24px', background: T.white, borderRadius: 12,
+              border: `1px solid ${T.border}`, textAlign: 'center',
+            }}>
+              <div style={{ fontSize: 32, fontWeight: 800, color: T.sage, marginBottom: 8 }}>{stat.num}</div>
+              <div style={{ fontSize: 12, color: T.sub, letterSpacing: '0.03em', fontWeight: 500 }}>{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── THREE LAYERS ── */}
-      <section style={{ padding: '52px 6%', background: T.surface, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 36 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: T.blue, letterSpacing: '0.1em', marginBottom: 8 }}>THE SOLUTION</div>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 10 }}>One Platform. Three Layers.</h2>
-            <p style={{ fontSize: 13, color: T.sub, maxWidth: 500, margin: '0 auto' }}>From legally mandatory → industry standard → world-class excellence. Tracked in one unified dashboard.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: 16 }}>
+      {/* ─── THE PROBLEM ─── */}
+      <section style={{
+        padding: '80px 6%',
+        background: T.dark, color: T.cream,
+      }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{
+            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
+            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
+          }}>The Challenge</div>
+
+          <h2 style={{
+            fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800,
+            lineHeight: 1.15, marginBottom: 48, letterSpacing: '-0.02em',
+          }}>Compliance is fragmented across tools, teams, and time</h2>
+
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 32, marginBottom: 48,
+          }}>
             {[
-              { icon:'⚖️', color:T.red, bg:T.redL, sub:'Layer 1 — Mandatory', title:'Regulatory Compliance', desc:'Every law, circular, and order from 50+ regulators. MUST comply or face fines, licence suspension, criminal liability.', tag:'Non-negotiable' },
-              { icon:'🏅', color:T.blue, bg:T.blueL, sub:'Layer 2 — Quality Markers', title:'Industry Standards', desc:'BIS, ISO, NABH, NABL standards. Required for contracts, export markets, insurance empanelment, government procurement.', tag:'Competitive Edge' },
-              { icon:'🏆', color:T.gold, bg:T.goldL, sub:'Layer 3 — Excellence', title:'Gold Standards', desc:'ACI Level 4, CMMI Level 5, SA8000, JCI. World-class benchmarks that attract premium clients and foreign investment.', tag:'Best-in-Class' },
-            ].map(l => (
-              <div key={l.title} style={{ background: l.bg, borderRadius: 18, padding: 24, border: `1.5px solid ${l.color}33` }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 46, height: 46, borderRadius: 13, background: T.card, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, boxShadow: `0 2px 10px ${l.color}22` }}>{l.icon}</div>
-                  <div>
-                    <div style={{ fontSize: 9, fontWeight: 700, color: l.color, letterSpacing: '0.08em' }}>{l.sub}</div>
-                    <div style={{ fontSize: 14, fontWeight: 800, color: T.text }}>{l.title}</div>
-                  </div>
-                </div>
-                <p style={{ fontSize: 12, color: T.sub, lineHeight: 1.7, marginBottom: 14 }}>{l.desc}</p>
-                <span style={{ display: 'inline-flex', padding: '3px 12px', borderRadius: 20, background: T.card, color: l.color, fontSize: 10, fontWeight: 700, border: `1px solid ${l.color}44` }}>{l.tag}</span>
+              {
+                icon: '📊',
+                title: 'Spreadsheet Chaos',
+                desc: 'Tracked across Excel, emails, WhatsApp, and paper registers. One missed deadline = fine.',
+              },
+              {
+                icon: '⏰',
+                title: 'Missed Deadlines',
+                desc: 'EPFO by 25th. ESIC by 15th. CERT-In in 6 hours. No single system alerts you.',
+              },
+              {
+                icon: '💼',
+                title: 'Fragmented Experts',
+                desc: 'Separate consultant for ISO, another for NABH, another for BCAS. Expensive and uncoordinated.',
+              },
+              {
+                icon: '🚨',
+                title: 'Audit Anxiety',
+                desc: 'Inspections come unannounced. Evidence scattered. Panic mode every time.',
+              },
+            ].map((item, i) => (
+              <div key={i} style={{
+                padding: '28px', background: `rgba(255,255,255,0.05)`,
+                borderRadius: 12, border: `1px solid ${T.border}`,
+              }}>
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{item.icon}</div>
+                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 10 }}>{item.title}</div>
+                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── WHAT WE'RE BUILDING ── */}
-      <section style={{ padding: '52px 6%', maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.blue, letterSpacing: '0.1em', marginBottom: 8 }}>WHAT WE'RE BUILDING</div>
-          <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 10 }}>The Build Roadmap</h2>
-          <p style={{ fontSize: 13, color: T.sub, maxWidth: 500, margin: '0 auto' }}>35+ services across 4 phases. Start with core, expand into an AWS-scale compliance ecosystem.</p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-          {buildingNow.map(phase => (
-            <div key={phase.phase} style={{ background: T.surface, borderRadius: 18, border: `1.5px solid ${phase.color}33`, overflow: 'hidden' }}>
-              <div style={{ background: phase.bg, padding: '14px 18px', borderBottom: `1px solid ${phase.color}22`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ fontSize: 12, fontWeight: 800, color: phase.color }}>{phase.phase}</div>
-                <span style={{ fontSize: 10, fontWeight: 700, background: T.card, color: phase.color, padding: '3px 10px', borderRadius: 20, border: `1px solid ${phase.color}33` }}>{phase.badge}</span>
-              </div>
-              <div style={{ padding: '14px 18px' }}>
-                {phase.items.map((item, i) => (
-                  <div key={item.name} style={{ paddingBottom: i < phase.items.length - 1 ? 12 : 0, marginBottom: i < phase.items.length - 1 ? 12 : 0, borderBottom: i < phase.items.length - 1 ? `1px solid ${T.border}` : 'none' }}>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: T.text, marginBottom: 3 }}>{item.name}</div>
-                    <div style={{ fontSize: 11, color: T.sub, lineHeight: 1.55 }}>{item.desc}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div style={{ textAlign: 'center', marginTop: 28 }}>
-          <button onClick={onViewRoadmap} style={{ ...btnPrimary, fontSize: 13 }}>
-            View Full Platform Blueprint →
-          </button>
-        </div>
-      </section>
+      {/* ─── THE SOLUTION ─── */}
+      <section style={{
+        padding: '80px 6%',
+        background: T.bg,
+      }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{
+            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
+            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
+          }}>The Solution</div>
 
-      {/* ── SECTORS ── */}
-      <section style={{ padding: '52px 6%', background: T.surface, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: T.blue, letterSpacing: '0.1em', marginBottom: 8 }}>COVERAGE</div>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 8 }}>Every Indian sector. Every regulator.</h2>
-            <p style={{ fontSize: 13, color: T.sub }}>Pre-built compliance libraries across 18 sectors — ready on day one.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
-            {sectors.map(s => (
-              <div key={s.name} style={{ background: T.card, borderRadius: 12, padding: '16px 12px', textAlign: 'center', border: `1px solid ${T.border}` }}>
-                <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
-                <div style={{ fontSize: 11, fontWeight: 700, color: T.text, lineHeight: 1.3, marginBottom: 4 }}>{s.name}</div>
-                <div style={{ fontSize: 9, color: T.muted, lineHeight: 1.4, marginBottom: 5 }}>{s.reg}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, color: s.color, fontFamily: 'monospace' }}>{s.count} items</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <h2 style={{
+            fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800,
+            lineHeight: 1.15, marginBottom: 60, letterSpacing: '-0.02em',
+          }}>Three layers. One platform. Complete clarity.</h2>
 
-      {/* ── THREE USERS ── */}
-      <section style={{ padding: '52px 6%', background: `linear-gradient(135deg, ${T.navy} 0%, #0A1829 100%)`, borderTop: `1px solid ${T.border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 36 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 8 }}>THE ECOSYSTEM</div>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', marginBottom: 10 }}>Three Users. One Ecosystem.</h2>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', maxWidth: 440, margin: '0 auto' }}>Each user makes the others more valuable — the classic platform flywheel.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: 24,
+          }}>
             {[
-              { icon:'🏢', role:'Business', color:'#60A5FA', desc:'Know exactly which compliances apply to you. Track every deadline. Upload evidence. See your ComplianceScore. Never face a surprise inspection.' },
-              { icon:'🔍', role:'Auditor / CA Firm', color:'#6EE7B7', desc:'Multi-client dashboard. Verify evidence remotely. Generate audit reports in BCAS/DGCA/ISO format automatically. Issue tamper-proof digital certificates.' },
-              { icon:'🏛️', role:'Regulator', color:'#FCD34D', desc:'Real-time sector-wide compliance health. Issue circulars that auto-populate in every affected business. AI-prioritised inspection queue.' },
-            ].map(u => (
-              <div key={u.role} style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 18, padding: 24, backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <div style={{ fontSize: 34, marginBottom: 12 }}>{u.icon}</div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: u.color, marginBottom: 10 }}>{u.role}</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{u.desc}</div>
+              {
+                color: T.red,
+                layer: 'Layer 1',
+                title: 'Regulatory',
+                subtitle: 'Mandatory — Non-negotiable',
+                desc: 'Every law, circular, and order from 50+ regulators. MUST comply or face fines, licence suspension, criminal liability.',
+              },
+              {
+                color: T.blue,
+                layer: 'Layer 2',
+                title: 'Standards',
+                subtitle: 'Competitive Advantage',
+                desc: 'BIS, ISO, NABH, NABL standards. Required for contracts, export markets, insurance empanelment, government procurement.',
+              },
+              {
+                color: T.gold,
+                layer: 'Layer 3',
+                title: 'Gold',
+                subtitle: 'World-Class Excellence',
+                desc: 'ACI Level 4, CMMI Level 5, SA8000, JCI. World-class benchmarks that attract premium clients and foreign investment.',
+              },
+            ].map((item, i) => (
+              <div key={i} style={{
+                padding: '32px', background: T.white, borderRadius: 12,
+                border: `2px solid ${item.color}`, borderLeft: `6px solid ${item.color}`,
+              }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: item.color, letterSpacing: '0.04em', marginBottom: 8 }}>{item.layer}</div>
+                <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>{item.title}</div>
+                <div style={{ fontSize: 12, color: T.sub, marginBottom: 16 }}>{item.subtitle}</div>
+                <p style={{ fontSize: 14, color: T.sub, lineHeight: 1.7 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA + WAITLIST ── */}
-      <section style={{ padding: '64px 6%', textAlign: 'center', maxWidth: 680, margin: '0 auto' }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: T.blue, letterSpacing: '0.1em', marginBottom: 14 }}>PLATFORM BLUEPRINT</div>
-        <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: T.text, letterSpacing: '-0.03em', marginBottom: 16 }}>See the complete platform vision</h2>
-        <p style={{ fontSize: 13, color: T.sub, lineHeight: 1.8, marginBottom: 32 }}>
-          Explore the full interactive blueprint — 3 compliance layers, 18 sectors, 4 delivery models,
-          35+ services, 12 revenue streams, and the AWS-scale vision for Indian compliance infrastructure.
-        </p>
-        <button onClick={onViewRoadmap} style={{ ...btnPrimary, marginBottom: 40 }}>
-          View Platform Roadmap →
-        </button>
+      {/* ─── SECTORS ─── */}
+      <section style={{
+        padding: '80px 6%',
+        background: T.dark, color: T.cream,
+      }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+            <div style={{
+              fontSize: 13, letterSpacing: '0.08em', color: T.sage,
+              fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
+            }}>Coverage</div>
+            <h2 style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800,
+              lineHeight: 1.15, letterSpacing: '-0.02em',
+            }}>Every Indian sector. Every regulator.</h2>
+          </div>
 
-        {/* Waitlist */}
-        <div style={{ background: T.surface, borderRadius: 20, padding: '28px 24px', border: `1px solid ${T.border}` }}>
-          <div style={{ fontSize: 15, fontWeight: 800, color: T.text, marginBottom: 6 }}>Join the Early Access Waitlist</div>
-          <div style={{ fontSize: 12, color: T.muted, marginBottom: 20 }}>Be first to know when we launch. No spam, ever.</div>
-          {submitted ? (
-            <div style={{ padding: '13px 20px', background: T.greenL, borderRadius: 12, color: T.green, fontSize: 13, fontWeight: 700, border: `1px solid ${T.green}33` }}>
-              ✓ You're on the list! We'll reach out soon.
-            </div>
-          ) : (
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <input
-                value={email} onChange={e => setEmail(e.target.value)}
-                placeholder="your@email.com" type="email"
-                style={{ flex: 1, minWidth: 200, padding: '11px 18px', borderRadius: 50, border: `1.5px solid ${T.border}`, fontSize: 13, outline: 'none', color: T.text, background: T.card }}
-                onFocus={e => e.target.style.borderColor = T.blue}
-                onBlur={e => e.target.style.borderColor = T.border}
-              />
-              <button
-                onClick={() => email && setSubmitted(true)}
-                style={{ padding: '11px 24px', borderRadius: 50, background: T.blue, color: '#fff', border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}
-              >Join Waitlist</button>
-            </div>
-          )}
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+            gap: 16,
+          }}>
+            {sectors.map((sector, i) => (
+              <div key={i} style={{
+                padding: '24px 16px', background: `rgba(255,255,255,0.05)`,
+                borderRadius: 12, textAlign: 'center', border: `1px solid ${T.border}`,
+              }}>
+                <div style={{ fontSize: 24, marginBottom: 8 }}>{sector.icon}</div>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4, lineHeight: 1.3 }}>{sector.name}</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>{sector.count} items</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer style={{ background: T.navy, borderTop: `1px solid ${T.border}`, padding: '28px 6%', textAlign: 'center' }}>
-        <div style={{ fontSize: 15, fontWeight: 800, color: '#D4E6FF', marginBottom: 6, fontFamily: 'monospace', letterSpacing: '0.04em' }}>CompliantBharat</div>
-        <div style={{ fontSize: 11, color: 'rgba(212,230,255,0.5)', marginBottom: 8 }}>India's National Compliance Intelligence Platform · Building for 2026</div>
-        <div style={{ fontSize: 11, color: 'rgba(212,230,255,0.5)' }}>
-          <span>Regulatory</span> · <span>Standards</span> · <span>Gold</span> ·{' '}
-          <span style={{ color: T.gold, fontFamily: 'monospace' }}>One Platform.</span>
+      {/* ─── CTA SECTION ─── */}
+      <section style={{
+        padding: '80px 6%',
+        background: T.bg,
+      }}>
+        <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            fontSize: 13, letterSpacing: '0.08em', color: T.sage,
+            fontWeight: 600, marginBottom: 20, textTransform: 'uppercase',
+          }}>Early Access</div>
+
+          <h2 style={{
+            fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800,
+            lineHeight: 1.2, marginBottom: 24, letterSpacing: '-0.02em',
+          }}>Get early access to build with us</h2>
+
+          <p style={{
+            fontSize: 16, color: T.sub, lineHeight: 1.7,
+            marginBottom: 32,
+          }}>Be first to know when we launch. Shape the future of compliance for India.</p>
+
+          <div style={{ display: 'flex', gap: 12, maxWidth: 400, margin: '0 auto' }}>
+            <input
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                flex: 1, padding: '12px 16px', borderRadius: 8,
+                border: `1px solid ${T.border}`, background: T.white,
+                fontSize: 14, color: T.text, outline: 'none',
+              }}
+            />
+            <button
+              onClick={() => { setSubmitted(true); setTimeout(() => setEmail(''), 1500) }}
+              style={{
+                padding: '12px 24px', background: T.sage, color: T.white,
+                border: 'none', borderRadius: 8, fontWeight: 600,
+                cursor: 'pointer', fontSize: 14, letterSpacing: '0.02em',
+              }}
+            >
+              {submitted ? '✓ Joined' : 'Join Waitlist'}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ─── */}
+      <footer style={{
+        padding: '40px 6%', borderTop: `1px solid ${T.border}`,
+        textAlign: 'center', color: T.sub, fontSize: 12,
+      }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <div style={{ fontWeight: 600, marginBottom: 8 }}>CompliantBharat</div>
+          <div style={{ fontSize: 11, letterSpacing: '0.03em' }}>
+            India's National Compliance Intelligence Platform · Building for 2026
+          </div>
+          <div style={{ marginTop: 12, fontSize: 11 }}>Regulatory · Standards · Gold · One Platform.</div>
         </div>
       </footer>
     </div>

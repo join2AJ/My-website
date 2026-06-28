@@ -1,119 +1,112 @@
-// CompliantBharat Design System Colors
-// Based on official brand guidelines: Navy→Blue sky ramp, Cloud-white surfaces, Status runway lights
+// CompliantBharat Design System - Premium Edition
+// Inspired by Indowud: Cream backgrounds, sage green accents, dark navy, breathing room
 
 export const LIGHT = {
-  // Primary: Navy→Blue sky ramp
-  navy800:  '#071830',      // Chrome
-  navy500:  '#1249C0',      // Aviation sector (action)
-  blue400:  '#3B82F6',      // Accent
+  // Primary: Premium palette
+  navy:     '#1A1F2E',      // Dark navy (primary text)
+  sage:     '#A8B868',      // Sage green accent
+  cream:    '#F5F1E8',      // Warm cream background
+  white:    '#FFFFFF',      // Pure white for cards
 
-  // Surfaces: Cloud-white
-  app:      '#F5F8FF',      // App background
+  // Surfaces
+  app:      '#F5F1E8',      // App background
   surface:  '#FFFFFF',      // Card surfaces
+  dark:     '#2A2F3E',      // Dark section background
 
   // Text
-  text:     '#0F172A',      // Primary text
-  sub:      '#475569',      // Secondary text
-  muted:    '#94A3B8',      // Tertiary text
+  text:     '#1A1F2E',      // Primary text
+  sub:      '#6B7280',      // Secondary text
+  muted:    '#9CA3AF',      // Tertiary text
 
-  // Borders
-  cloud200: '#E2E8F0',      // Hairline borders
-  cloud300: '#D1D5DB',      // Stronger dividers
+  // Borders & dividers
+  border:   '#E5E0D5',      // Light borders
+  divider:  '#D4CFC4',      // Stronger dividers
 
-  // Status: Runway lights (semantic)
-  green:    '#15803D',      // Clear (runway green light)
-  amber:    '#B45309',      // Caution (runway amber light)
-  red:      '#DC2626',      // Stop (runway red light)
+  // Accents
+  green:    '#A8B868',      // Sage green
+  greenL:   '#E8EFD5',      // Light sage
+  blue:     '#4B5B9F',      // Deep blue
+  blueL:    '#E5EBF7',      // Light blue
+  gold:     '#C9A961',      // Gold accent
+  goldL:    '#F5F0E8',      // Light gold
+  red:      '#D97706',      // Red/warning
+  redL:     '#FEE2E2',      // Light red
+  amber:    '#D97706',      // Amber
+  amberL:   '#FEF3C7',      // Light amber
+  purple:   '#7E7B9F',      // Purple
+  purpleL:  '#F5F3FF',      // Light purple
+  teal:     '#6B9199',      // Teal
+  tealL:    '#D1E5EA',      // Light teal
 
-  // Sector Liveries (fixed hues)
-  sectorAviation:      '#1249C0',  // Blue
-  sectorFinance:       '#047857',  // Emerald
-  sectorHealthcare:    '#0D9488',  // Teal
-  sectorManufacturing: '#C2410C',  // Ember
-  sectorFood:          '#4D7C0F',  // Harvest
-  sectorIT:            '#6D28D9',  // Violet
-  sectorEnergy:        '#CA8A04',  // Amber
-  sectorEducation:     '#4338CA',  // Indigo
-  sectorUniversal:     '#475569',  // Slate
+  // Sector Liveries (earthy palette)
+  sectorAviation:      '#4B5B9F',  // Deep blue
+  sectorFinance:       '#7BA888',  // Sage green
+  sectorHealthcare:    '#6B9199',  // Teal
+  sectorManufacturing: '#A37D5C',  // Warm brown
+  sectorFood:          '#A8B868',  // Sage green
+  sectorIT:            '#7E7B9F',  // Purple
+  sectorEnergy:        '#C9A961',  // Gold
+  sectorEducation:     '#5B6B8F',  // Indigo
+  sectorUniversal:     '#9CA3AF',  // Slate
 
-  // Regulator sample colors (would be expanded)
-  regulatorBCAS:       '#DC2626',  // Red
-  regulatorDGCA:       '#1249C0',  // Blue
-
-  // Aliases for compatibility
-  bg:       '#F5F8FF',
+  // Aliases
   card:     '#FFFFFF',
-  border:   '#E2E8F0',
-  accent:   '#1249C0',
-  blueL:    '#DBEAFE',
-  blueM:    '#60A5FA',
-  navy:     '#071830',
-  greenL:   '#DCFCE7',
-  purple:   '#6D28D9',
-  purpleL:  '#F5F3FF',
-  gold:     '#D97706',
-  goldL:    '#FFFBEB',
-  redL:     '#FEE2E2',
-  amberL:   '#FEF3C7',
-  teal:     '#0D9488',
-  tealL:    '#CCFBF1',
+  accent:   '#A8B868',
+  bg:       '#F5F1E8',
+  blueM:    '#7B8FB5',
 }
 
 export const DARK = {
-  // Dark chrome: Navy cockpit display
-  navy800:  '#071830',      // Chrome
-  navy700:  '#0A1E3C',      // ATC comm box (night-mode)
-  navy500:  '#1249C0',      // Aviation sector action
-  blue400:  '#60A5FA',      // Accent (lighter for dark mode)
+  // Dark mode palette
+  navy:     '#F5F1E8',      // Light text on dark
+  sage:     '#B8C878',      // Lighter sage
+  cream:    '#1A1F2E',      // Dark background
+  white:    '#2A2F3E',      // Dark cards
 
-  // Surfaces: Dark blue-tinted
-  app:      '#0A1E3C',      // App background (ATC display)
-  surface:  '#0F2747',      // Card surfaces
+  // Surfaces
+  app:      '#1A1F2E',      // Dark background
+  surface:  '#2A2F3E',      // Dark cards
+  dark:     '#0F1219',      // Even darker
 
-  // Text: Light on dark
-  text:     '#D4E6FF',      // Primary text (white-blue)
-  sub:      '#6B9AC4',      // Secondary text
-  muted:    '#4A6B99',      // Tertiary text
+  // Text
+  text:     '#F5F1E8',      // Light text
+  sub:      '#C7C9C9',      // Secondary text
+  muted:    '#9CA3AF',      // Tertiary text
 
   // Borders
-  cloud200: '#1A3254',      // Hairline borders (navy)
-  cloud300: '#2A4A7A',      // Stronger dividers
+  border:   '#3A3F4E',      // Dark borders
+  divider:  '#4A4F5E',      // Stronger dividers
 
-  // Status: Runway lights (same semantic as light)
-  green:    '#22C55E',      // Clear (brighter for dark mode)
-  amber:    '#FBBF24',      // Caution (brighter for dark mode)
-  red:      '#EF4444',      // Stop (bright red)
+  // Accents
+  green:    '#B8C878',      // Lighter sage
+  greenL:   '#2A3422',      // Dark sage bg
+  blue:     '#7B9FD9',      // Lighter blue
+  blueL:    '#1A2A4A',      // Dark blue bg
+  gold:     '#E8BA68',      // Lighter gold
+  goldL:    '#3A2A1A',      // Dark gold bg
+  red:      '#FF6B6B',      // Bright red
+  redL:     '#4A1A1A',      // Dark red bg
+  amber:    '#FFB84D',      // Lighter amber
+  amberL:   '#4A3A1A',      // Dark amber bg
+  purple:   '#B8B5D9',      // Lighter purple
+  purpleL:  '#2A283A',      // Dark purple bg
+  teal:     '#7BD4E8',      // Lighter teal
+  tealL:    '#1A3A4A',      // Dark teal bg
 
   // Sector Liveries
-  sectorAviation:      '#3B82F6',  // Blue (brightened)
-  sectorFinance:       '#10B981',  // Emerald (brightened)
-  sectorHealthcare:    '#06B6D4',  // Teal (brightened)
-  sectorManufacturing: '#F97316',  // Ember (brightened)
-  sectorFood:          '#84CC16',  // Harvest (brightened)
-  sectorIT:            '#A78BFA',  // Violet (brightened)
-  sectorEnergy:        '#FBBF24',  // Amber (brightened)
-  sectorEducation:     '#6366F1',  // Indigo (brightened)
-  sectorUniversal:     '#6B7280',  // Slate (brightened)
+  sectorAviation:      '#7B9FD9',
+  sectorFinance:       '#8BC898',
+  sectorHealthcare:    '#7BAAB9',
+  sectorManufacturing: '#C9A889',
+  sectorFood:          '#B8C878',
+  sectorIT:            '#B8B5D9',
+  sectorEnergy:        '#E8BA68',
+  sectorEducation:     '#8B9BAF',
+  sectorUniversal:     '#B5B9C9',
 
-  // Regulator sample colors
-  regulatorBCAS:       '#EF4444',  // Red
-  regulatorDGCA:       '#3B82F6',  // Blue
-
-  // Aliases for compatibility
-  bg:       '#0A1E3C',
-  card:     '#0F2747',
-  border:   '#1A3254',
-  accent:   '#3B82F6',
-  blueL:    '#1E3A8A',
-  blueM:    '#60A5FA',
-  navy:     '#071830',
-  greenL:   '#065F46',
-  purple:   '#7E22CE',
-  purpleL:  '#3730A3',
-  gold:     '#F59E0B',
-  goldL:    '#78350F',
-  redL:     '#7F1D1D',
-  amberL:   '#78350F',
-  teal:     '#06B6D4',
-  tealL:    '#164E63',
+  // Aliases
+  card:     '#2A2F3E',
+  accent:   '#B8C878',
+  bg:       '#1A1F2E',
+  blueM:    '#8BA5C9',
 }
