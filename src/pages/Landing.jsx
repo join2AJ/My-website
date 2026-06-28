@@ -1,105 +1,98 @@
 import { useState } from 'react'
+import { LIGHT, DARK } from '../themes.js'
 
-const T = {
-  bg: '#F0F4FF', surface: '#FFFFFF', card: '#F8FAFF',
-  border: '#D6E0FF', text: '#0F1733', sub: '#3D5080', muted: '#7A90BF',
-  blue: '#1A56DB', blueL: '#EBF2FF', blueM: '#93B4F8', navy: '#0D2B6E',
-  accent: '#FF6B35', green: '#0E9F6E', greenL: '#ECFDF5',
-  purple: '#7C3AED', purpleL: '#F5F3FF',
-  gold: '#D97706', goldL: '#FFFBEB',
-  red: '#DC2626', redL: '#FEF2F2', teal: '#0891B2', tealL: '#ECFEFF',
-}
-
-const sectors = [
-  { icon:'🏦', name:'Finance & Banking',   color:T.red,    count:'200+', reg:'SEBI · RBI · IRDAI' },
-  { icon:'✈️', name:'Aviation',            color:T.blue,   count:'150+', reg:'DGCA · AAI · BCAS' },
-  { icon:'🏥', name:'Healthcare',          color:T.purple, count:'180+', reg:'NMC · NABH · CPCB' },
-  { icon:'🏭', name:'Manufacturing',       color:T.teal,   count:'250+', reg:'BIS · DPIIT · MSME' },
-  { icon:'🌾', name:'Food & Agriculture',  color:T.green,  count:'120+', reg:'FSSAI · APEDA · AGMARK' },
-  { icon:'💻', name:'IT / Technology',     color:T.blue,   count:'80+',  reg:'MeitY · CERT-In · TRAI' },
-  { icon:'⚡', name:'Energy & Power',      color:T.gold,   count:'130+', reg:'CERC · BEE · MNRE' },
-  { icon:'🎓', name:'Education',           color:T.purple, count:'90+',  reg:'UGC · AICTE · NCTE' },
-  { icon:'💊', name:'Pharma & Chemicals',  color:T.teal,   count:'160+', reg:'CDSCO · DCGI · MSIHC' },
-  { icon:'🛢️', name:'Oil & Gas',           color:T.accent, count:'140+', reg:'PNGRB · OISD · MoPNG' },
-  { icon:'📡', name:'Telecom',             color:T.blue,   count:'100+', reg:'TRAI · DOT · WPC' },
-  { icon:'🏗️', name:'Real Estate',         color:T.gold,   count:'110+', reg:'RERA · NBC · MoHUA' },
-  { icon:'🚢', name:'Maritime & Ports',    color:T.teal,   count:'120+', reg:'DG Shipping · TAMP' },
-  { icon:'🛡️', name:'Insurance',           color:T.red,    count:'100+', reg:'IRDAI · GIC · LIC Reg' },
-  { icon:'🚛', name:'Logistics',           color:T.muted,  count:'90+',  reg:'MoRTH · DGMS · MSME' },
-  { icon:'📺', name:'Media & OTT',         color:T.purple, count:'70+',  reg:'MIB · TRAI · MEITY' },
-  { icon:'🛒', name:'Retail & E-Commerce', color:T.green,  count:'80+',  reg:'CCPA · BIS · MCA' },
-  { icon:'🏢', name:'Universal / MSME',    color:T.muted,  count:'60+',  reg:'MSME · Startup India' },
-]
-
-const buildingNow = [
-  {
-    phase: 'Phase 1 — Building Now',
-    color: T.blue, bg: T.blueL,
-    badge: '🔨 In Progress',
-    items: [
-      { name: 'ComplianceOS Core', desc: 'Compliance calendar, task tracking, deadline alerts across all 3 layers' },
-      { name: 'Evidence Vault', desc: 'Tamper-proof document storage with AI auto-tagging and version control' },
-      { name: 'ComplianceScore™', desc: 'Three-dimensional score: Regulatory / Standards / Gold — board-ready dashboard' },
-      { name: 'Circular Intelligence Engine', desc: 'Auto-monitors 50+ regulator portals daily, creates tasks on new circulars' },
-    ],
-  },
-  {
-    phase: 'Phase 2 — Coming Next',
-    color: T.green, bg: T.greenL,
-    badge: '📋 Planned',
-    items: [
-      { name: 'GapAI', desc: 'Upload any document → Claude AI maps gaps to regulatory controls in seconds' },
-      { name: 'AuditWorkspace', desc: 'Multi-client dashboard for CA firms and ISO certification bodies' },
-      { name: 'ReportForge', desc: 'One-click audit reports in BCAS / DGCA / NABH / ISO / SEBI formats' },
-      { name: 'PolicyGen AI', desc: 'Describe your company → get fully drafted ISO 27001 policies and DPDPA notices' },
-    ],
-  },
-  {
-    phase: 'Phase 3 — Future',
-    color: T.purple, bg: T.purpleL,
-    badge: '🔭 Roadmap',
-    items: [
-      { name: 'ConsultantMarketplace', desc: 'Verified ISO consultants and CA firms — browse, compare, book' },
-      { name: 'ComplianceScore API', desc: 'Banks and PE firms query vendor compliance scores for due diligence' },
-      { name: 'AuditCopilot AI', desc: 'GitHub Copilot for auditors — highlights anomalies, suggests follow-ups' },
-      { name: 'VirtualCISO', desc: 'Senior security expert embedded part-time, manages auditors and regulators' },
-    ],
-  },
-  {
-    phase: 'Phase 4 — Scale',
-    color: T.gold, bg: T.goldL,
-    badge: '🏛️ Enterprise',
-    items: [
-      { name: 'RegulatorDashboard', desc: 'SEBI sees all 5,000 brokers\' scores. BCAS sees all 157 airports. Real-time.' },
-      { name: 'StateGovPortal', desc: 'White-labelled state government portals — one MoU brings 50,000 MSMEs onboard' },
-      { name: 'InspectionQueue AI', desc: 'AI prioritises which entities to inspect next based on scores and history' },
-      { name: 'InsuranceConnect', desc: 'High compliance score = lower cyber insurance premium. Referral marketplace.' },
-    ],
-  },
-]
-
-function Stat({ num, label }) {
+function Stat({ num, label, T }) {
   return (
     <div style={{ textAlign: 'center', flex: 1, minWidth: 80 }}>
-      <div style={{ fontSize: 28, fontWeight: 900, color: T.blue, letterSpacing: '-0.03em' }}>{num}</div>
-      <div style={{ fontSize: 11, color: T.muted, marginTop: 2 }}>{label}</div>
+      <div style={{ fontSize: 28, fontWeight: 900, color: T.gold, letterSpacing: '-0.03em', fontFamily: 'monospace' }}>{num}</div>
+      <div style={{ fontSize: 11, color: T.muted, marginTop: 2, letterSpacing: '0.04em' }}>{label}</div>
     </div>
   )
 }
 
-export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklists }) {
+export default function Landing({ dark = false, onToggleDark, onViewRoadmap, onViewAviation, onViewChecklists, onViewAdmin }) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
+  const T = dark ? DARK : LIGHT
+
+  const sectors = [
+    { icon:'🏦', name:'Finance & Banking',   color:T.red,    count:'200+', reg:'SEBI · RBI · IRDAI' },
+    { icon:'✈️', name:'Aviation',            color:T.blue,   count:'150+', reg:'DGCA · AAI · BCAS' },
+    { icon:'🏥', name:'Healthcare',          color:T.purple, count:'180+', reg:'NMC · NABH · CPCB' },
+    { icon:'🏭', name:'Manufacturing',       color:T.teal,   count:'250+', reg:'BIS · DPIIT · MSME' },
+    { icon:'🌾', name:'Food & Agriculture',  color:T.green,  count:'120+', reg:'FSSAI · APEDA · AGMARK' },
+    { icon:'💻', name:'IT / Technology',     color:T.blue,   count:'80+',  reg:'MeitY · CERT-In · TRAI' },
+    { icon:'⚡', name:'Energy & Power',      color:T.gold,   count:'130+', reg:'CERC · BEE · MNRE' },
+    { icon:'🎓', name:'Education',           color:T.purple, count:'90+',  reg:'UGC · AICTE · NCTE' },
+    { icon:'💊', name:'Pharma & Chemicals',  color:T.teal,   count:'160+', reg:'CDSCO · DCGI · MSIHC' },
+    { icon:'🛢️', name:'Oil & Gas',           color:T.accent, count:'140+', reg:'PNGRB · OISD · MoPNG' },
+    { icon:'📡', name:'Telecom',             color:T.blue,   count:'100+', reg:'TRAI · DOT · WPC' },
+    { icon:'🏗️', name:'Real Estate',         color:T.gold,   count:'110+', reg:'RERA · NBC · MoHUA' },
+    { icon:'🚢', name:'Maritime & Ports',    color:T.teal,   count:'120+', reg:'DG Shipping · TAMP' },
+    { icon:'🛡️', name:'Insurance',           color:T.red,    count:'100+', reg:'IRDAI · GIC · LIC Reg' },
+    { icon:'🚛', name:'Logistics',           color:T.muted,  count:'90+',  reg:'MoRTH · DGMS · MSME' },
+    { icon:'📺', name:'Media & OTT',         color:T.purple, count:'70+',  reg:'MIB · TRAI · MEITY' },
+    { icon:'🛒', name:'Retail & E-Commerce', color:T.green,  count:'80+',  reg:'CCPA · BIS · MCA' },
+    { icon:'🏢', name:'Universal / MSME',    color:T.muted,  count:'60+',  reg:'MSME · Startup India' },
+  ]
+
+  const buildingNow = [
+    {
+      phase: 'Phase 1 — Building Now',
+      color: T.blue, bg: T.blueL,
+      badge: '🔨 In Progress',
+      items: [
+        { name: 'ComplianceOS Core', desc: 'Compliance calendar, task tracking, deadline alerts across all 3 layers' },
+        { name: 'Evidence Vault', desc: 'Tamper-proof document storage with AI auto-tagging and version control' },
+        { name: 'ComplianceScore™', desc: 'Three-dimensional score: Regulatory / Standards / Gold — board-ready dashboard' },
+        { name: 'Circular Intelligence Engine', desc: 'Auto-monitors 50+ regulator portals daily, creates tasks on new circulars' },
+      ],
+    },
+    {
+      phase: 'Phase 2 — Coming Next',
+      color: T.green, bg: T.greenL,
+      badge: '📋 Planned',
+      items: [
+        { name: 'GapAI', desc: 'Upload any document → Claude AI maps gaps to regulatory controls in seconds' },
+        { name: 'AuditWorkspace', desc: 'Multi-client dashboard for CA firms and ISO certification bodies' },
+        { name: 'ReportForge', desc: 'One-click audit reports in BCAS / DGCA / NABH / ISO / SEBI formats' },
+        { name: 'PolicyGen AI', desc: 'Describe your company → get fully drafted ISO 27001 policies and DPDPA notices' },
+      ],
+    },
+    {
+      phase: 'Phase 3 — Future',
+      color: T.purple, bg: T.purpleL,
+      badge: '🔭 Roadmap',
+      items: [
+        { name: 'ConsultantMarketplace', desc: 'Verified ISO consultants and CA firms — browse, compare, book' },
+        { name: 'ComplianceScore API', desc: 'Banks and PE firms query vendor compliance scores for due diligence' },
+        { name: 'AuditCopilot AI', desc: 'GitHub Copilot for auditors — highlights anomalies, suggests follow-ups' },
+        { name: 'VirtualCISO', desc: 'Senior security expert embedded part-time, manages auditors and regulators' },
+      ],
+    },
+    {
+      phase: 'Phase 4 — Scale',
+      color: T.gold, bg: T.goldL,
+      badge: '🏛️ Enterprise',
+      items: [
+        { name: 'RegulatorDashboard', desc: 'SEBI sees all 5,000 brokers\' scores. BCAS sees all 157 airports. Real-time.' },
+        { name: 'StateGovPortal', desc: 'White-labelled state government portals — one MoU brings 50,000 MSMEs onboard' },
+        { name: 'InspectionQueue AI', desc: 'AI prioritises which entities to inspect next based on scores and history' },
+        { name: 'InsuranceConnect', desc: 'High compliance score = lower cyber insurance premium. Referral marketplace.' },
+      ],
+    },
+  ]
+
   const btnPrimary = {
     padding: '13px 28px', borderRadius: 50, border: 'none', cursor: 'pointer',
-    background: `linear-gradient(135deg, ${T.blue}, ${T.navy})`,
+    background: `linear-gradient(135deg, ${T.gold}, ${T.accent})`,
     color: '#fff', fontSize: 14, fontWeight: 700,
-    boxShadow: `0 4px 20px ${T.blue}44`, letterSpacing: '-0.01em',
+    boxShadow: `0 4px 20px ${T.gold}44`, letterSpacing: '-0.01em',
   }
   const btnOutline = {
     padding: '13px 28px', borderRadius: 50, cursor: 'pointer',
-    background: T.surface, color: T.navy, border: `1.5px solid ${T.border}`,
+    background: T.blueL, color: T.text, border: `1.5px solid ${T.border}`,
     fontSize: 14, fontWeight: 600,
   }
 
@@ -111,40 +104,54 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
         background: T.surface, borderBottom: `1px solid ${T.border}`,
         padding: '13px 6%', display: 'flex', alignItems: 'center',
         justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50,
-        boxShadow: '0 1px 12px rgba(26,86,219,0.07)',
+        boxShadow: dark ? '0 1px 20px rgba(0,0,0,0.4)' : '0 1px 12px rgba(0,0,0,0.06)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
           <div style={{
             width: 38, height: 38, borderRadius: 10, flexShrink: 0,
             background: `linear-gradient(135deg, ${T.blue}, ${T.navy})`,
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
+            border: `1px solid ${T.border}`,
           }}>🇮🇳</div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: T.navy, letterSpacing: '-0.02em', lineHeight: 1, whiteSpace: 'nowrap' }}>CompliantBharat</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: T.text, letterSpacing: '-0.02em', lineHeight: 1, whiteSpace: 'nowrap' }}>CompliantBharat</div>
             <div style={{ fontSize: 9, color: T.muted, letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>India's Compliance OS</div>
           </div>
         </div>
         <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexShrink: 1, minWidth: 0, overflow: 'hidden' }}>
+          {onViewAdmin && (
+            <button onClick={onViewAdmin} style={{
+              padding: '7px 14px', borderRadius: 8, background: T.purpleL,
+              color: T.purple, border: `1px solid ${T.purple}33`, fontSize: 12,
+              fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+            }}>⚙️ Admin</button>
+          )}
           <button onClick={onViewAviation} style={{
-            padding: '7px 14px', borderRadius: 24, background: '#ECFEFF',
+            padding: '7px 14px', borderRadius: 8, background: T.tealL,
             color: T.teal, border: `1px solid ${T.teal}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>✈️ Aviation Demo</button>
           <button onClick={onViewChecklists} className="nav-hide-sm" style={{
-            padding: '7px 14px', borderRadius: 24, background: T.greenL,
+            padding: '7px 14px', borderRadius: 8, background: T.greenL,
             color: T.green, border: `1px solid ${T.green}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>📋 Checklists</button>
           <button onClick={onViewRoadmap} className="nav-hide-sm" style={{
-            padding: '7px 14px', borderRadius: 24, background: T.blueL,
+            padding: '7px 14px', borderRadius: 8, background: T.blueL,
             color: T.blue, border: `1px solid ${T.blue}33`, fontSize: 12,
             fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
           }}>Platform Vision</button>
+          <button onClick={onToggleDark} title={dark ? 'Light mode' : 'Dark mode'} style={{
+            width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
+            border: `1px solid ${T.border}`, background: T.card,
+            cursor: 'pointer', fontSize: 15,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>{dark ? '☀️' : '🌙'}</button>
           <button style={{
-            padding: '7px 14px', borderRadius: 24, border: 'none', cursor: 'pointer',
-            background: `linear-gradient(135deg, ${T.blue}, ${T.navy})`,
+            padding: '7px 14px', borderRadius: 8, border: 'none', cursor: 'pointer',
+            background: `linear-gradient(135deg, ${T.gold}, ${T.accent})`,
             color: '#fff', fontSize: 12, fontWeight: 600,
-            boxShadow: `0 2px 10px ${T.blue}44`, whiteSpace: 'nowrap',
+            boxShadow: `0 2px 10px ${T.gold}44`, whiteSpace: 'nowrap',
           }}>Join Waitlist</button>
         </div>
       </nav>
@@ -155,20 +162,33 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
 
           {/* Left col: badge + headline + description */}
           <div>
+            {/* Status ticker */}
+            <div style={{
+              fontFamily: 'monospace',
+              background: dark ? '#060F1F' : T.blueL,
+              border: `1px solid ${T.border}`, borderRadius: 8,
+              padding: '8px 14px', marginBottom: 20,
+              fontSize: 10, color: T.gold, letterSpacing: '0.06em',
+              display: 'flex', alignItems: 'center', gap: 8,
+            }}>
+              <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: T.green, flexShrink: 0 }} />
+              COMPLIANCE CLEARANCE: ACTIVE · 18 SECTORS · 50+ REGULATORS · ALL RUNWAYS CLEAR
+            </div>
+
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '5px 16px', borderRadius: 24,
+              padding: '5px 16px', borderRadius: 8,
               background: T.blueL, border: `1px solid ${T.blue}33`,
-              color: T.blue, fontSize: 11, fontWeight: 700, marginBottom: 28, letterSpacing: '0.04em',
-            }}>🇮🇳 BUILT FOR INDIA · NOW IN DEVELOPMENT</div>
+              color: T.blueM, fontSize: 11, fontWeight: 700, marginBottom: 28, letterSpacing: '0.04em',
+            }}>✈ BUILT FOR INDIA · NOW IN DEVELOPMENT</div>
 
             <h1 style={{
-              fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 900, color: T.navy,
+              fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 900, color: T.text,
               lineHeight: 1.08, letterSpacing: '-0.04em', marginBottom: 22,
             }}>
               India's First<br />
               <span style={{
-                background: `linear-gradient(135deg, ${T.blue} 0%, ${T.navy} 100%)`,
+                background: `linear-gradient(135deg, ${T.blueM} 0%, ${T.blue} 100%)`,
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               }}>Compliance<br />Operating System</span>
             </h1>
@@ -184,10 +204,10 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
 
           {/* Right col: stats + CTAs */}
           <div>
-            <div className="hero-stats">
+            <div className="hero-stats" style={{ background: T.surface, border: `1px solid ${T.border}` }}>
               {[['50+','Regulators'],['18','Sectors'],['2,000+','Obligations'],['4','Delivery Models']].map(([n,l], i, arr) => (
                 <div key={l} style={{ flex: 1, borderRight: i < arr.length - 1 ? `1px solid ${T.border}` : 'none' }}>
-                  <Stat num={n} label={l} />
+                  <Stat num={n} label={l} T={T} />
                 </div>
               ))}
             </div>
@@ -239,14 +259,14 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
             ].map(l => (
               <div key={l.title} style={{ background: l.bg, borderRadius: 18, padding: 24, border: `1.5px solid ${l.color}33` }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 46, height: 46, borderRadius: 13, background: T.surface, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, boxShadow: `0 2px 10px ${l.color}22` }}>{l.icon}</div>
+                  <div style={{ width: 46, height: 46, borderRadius: 13, background: T.card, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, boxShadow: `0 2px 10px ${l.color}22` }}>{l.icon}</div>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: l.color, letterSpacing: '0.08em' }}>{l.sub}</div>
                     <div style={{ fontSize: 14, fontWeight: 800, color: T.text }}>{l.title}</div>
                   </div>
                 </div>
                 <p style={{ fontSize: 12, color: T.sub, lineHeight: 1.7, marginBottom: 14 }}>{l.desc}</p>
-                <span style={{ display: 'inline-flex', padding: '3px 12px', borderRadius: 20, background: T.surface, color: l.color, fontSize: 10, fontWeight: 700, border: `1px solid ${l.color}44` }}>{l.tag}</span>
+                <span style={{ display: 'inline-flex', padding: '3px 12px', borderRadius: 20, background: T.card, color: l.color, fontSize: 10, fontWeight: 700, border: `1px solid ${l.color}44` }}>{l.tag}</span>
               </div>
             ))}
           </div>
@@ -265,7 +285,7 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
             <div key={phase.phase} style={{ background: T.surface, borderRadius: 18, border: `1.5px solid ${phase.color}33`, overflow: 'hidden' }}>
               <div style={{ background: phase.bg, padding: '14px 18px', borderBottom: `1px solid ${phase.color}22`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ fontSize: 12, fontWeight: 800, color: phase.color }}>{phase.phase}</div>
-                <span style={{ fontSize: 10, fontWeight: 700, background: T.surface, color: phase.color, padding: '3px 10px', borderRadius: 20, border: `1px solid ${phase.color}33` }}>{phase.badge}</span>
+                <span style={{ fontSize: 10, fontWeight: 700, background: T.card, color: phase.color, padding: '3px 10px', borderRadius: 20, border: `1px solid ${phase.color}33` }}>{phase.badge}</span>
               </div>
               <div style={{ padding: '14px 18px' }}>
                 {phase.items.map((item, i) => (
@@ -295,11 +315,11 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
             {sectors.map(s => (
-              <div key={s.name} style={{ background: T.card, borderRadius: 14, padding: '16px 12px', textAlign: 'center', border: `1px solid ${T.border}` }}>
+              <div key={s.name} style={{ background: T.card, borderRadius: 12, padding: '16px 12px', textAlign: 'center', border: `1px solid ${T.border}` }}>
                 <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
                 <div style={{ fontSize: 11, fontWeight: 700, color: T.text, lineHeight: 1.3, marginBottom: 4 }}>{s.name}</div>
                 <div style={{ fontSize: 9, color: T.muted, lineHeight: 1.4, marginBottom: 5 }}>{s.reg}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, color: s.color }}>{s.count} items</div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: s.color, fontFamily: 'monospace' }}>{s.count} items</div>
               </div>
             ))}
           </div>
@@ -307,23 +327,23 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
       </section>
 
       {/* ── THREE USERS ── */}
-      <section style={{ padding: '52px 6%', background: `linear-gradient(135deg, ${T.navy} 0%, ${T.blue} 100%)` }}>
+      <section style={{ padding: '52px 6%', background: `linear-gradient(135deg, ${T.navy} 0%, #0A1829 100%)`, borderTop: `1px solid ${T.border}` }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.1em', marginBottom: 8 }}>THE ECOSYSTEM</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', marginBottom: 8 }}>THE ECOSYSTEM</div>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', marginBottom: 10 }}>Three Users. One Ecosystem.</h2>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', maxWidth: 440, margin: '0 auto' }}>Each user makes the others more valuable — the classic platform flywheel.</p>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', maxWidth: 440, margin: '0 auto' }}>Each user makes the others more valuable — the classic platform flywheel.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
             {[
-              { icon:'🏢', role:'Business', color:'#93B4F8', desc:'Know exactly which compliances apply to you. Track every deadline. Upload evidence. See your ComplianceScore. Never face a surprise inspection.' },
+              { icon:'🏢', role:'Business', color:'#60A5FA', desc:'Know exactly which compliances apply to you. Track every deadline. Upload evidence. See your ComplianceScore. Never face a surprise inspection.' },
               { icon:'🔍', role:'Auditor / CA Firm', color:'#6EE7B7', desc:'Multi-client dashboard. Verify evidence remotely. Generate audit reports in BCAS/DGCA/ISO format automatically. Issue tamper-proof digital certificates.' },
               { icon:'🏛️', role:'Regulator', color:'#FCD34D', desc:'Real-time sector-wide compliance health. Issue circulars that auto-populate in every affected business. AI-prioritised inspection queue.' },
             ].map(u => (
-              <div key={u.role} style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 18, padding: 24, backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
+              <div key={u.role} style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 18, padding: 24, backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div style={{ fontSize: 34, marginBottom: 12 }}>{u.icon}</div>
                 <div style={{ fontSize: 16, fontWeight: 800, color: u.color, marginBottom: 10 }}>{u.role}</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.72)', lineHeight: 1.7 }}>{u.desc}</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{u.desc}</div>
               </div>
             ))}
           </div>
@@ -355,7 +375,7 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
               <input
                 value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="your@email.com" type="email"
-                style={{ flex: 1, minWidth: 200, padding: '11px 18px', borderRadius: 50, border: `1.5px solid ${T.border}`, fontSize: 13, outline: 'none', color: T.text, background: T.bg }}
+                style={{ flex: 1, minWidth: 200, padding: '11px 18px', borderRadius: 50, border: `1.5px solid ${T.border}`, fontSize: 13, outline: 'none', color: T.text, background: T.card }}
                 onFocus={e => e.target.style.borderColor = T.blue}
                 onBlur={e => e.target.style.borderColor = T.border}
               />
@@ -369,12 +389,12 @@ export default function Landing({ onViewRoadmap, onViewAviation, onViewChecklist
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ background: T.navy, padding: '28px 6%', textAlign: 'center' }}>
-        <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 6 }}>CompliantBharat</div>
-        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 8 }}>India's National Compliance Intelligence Platform · Building for 2026</div>
-        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>
+      <footer style={{ background: T.navy, borderTop: `1px solid ${T.border}`, padding: '28px 6%', textAlign: 'center' }}>
+        <div style={{ fontSize: 15, fontWeight: 800, color: '#D4E6FF', marginBottom: 6, fontFamily: 'monospace', letterSpacing: '0.04em' }}>CompliantBharat</div>
+        <div style={{ fontSize: 11, color: 'rgba(212,230,255,0.5)', marginBottom: 8 }}>India's National Compliance Intelligence Platform · Building for 2026</div>
+        <div style={{ fontSize: 11, color: 'rgba(212,230,255,0.5)' }}>
           <span>Regulatory</span> · <span>Standards</span> · <span>Gold</span> ·{' '}
-          <span style={{ color: T.accent }}>One Platform.</span>
+          <span style={{ color: T.gold, fontFamily: 'monospace' }}>One Platform.</span>
         </div>
       </footer>
     </div>

@@ -4,7 +4,8 @@ body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; overflow-x: hidd
 button { font-family: inherit; cursor: pointer; }
 input, textarea { font-family: inherit; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-thumb { background: #93B4F8; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
 
 /* ── Shared back-bar (App.jsx) ── */
 .backbar { padding: 10px 16px; display: flex; align-items: center; gap: 12; }
@@ -69,9 +70,7 @@ input, textarea { font-family: inherit; }
 
 .hero-stats {
   display: flex;
-  background: #FFFFFF;
-  border: 1px solid #D6E0FF;
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 20px 10px;
   max-width: 580px;
   margin: 0 auto 36px;
