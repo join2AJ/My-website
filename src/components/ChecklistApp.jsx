@@ -2,12 +2,6 @@ import { useState, useCallback } from 'react'
 import { LIGHT, DARK } from '../themes.js'
 import { CHECKLISTS } from '../data/checklistData.js'
 
-let T = {
-  ...DARK,
-  sky: DARK.blueM, tint: DARK.blueL, tint2: DARK.bg,
-  border2: '#2A4A7A', pass: DARK.greenL, fail: DARK.redL, na: '#111E30',
-}
-
 const sections = [...new Set(CHECKLISTS.map(c => c.section))]
 
 function evalResult(val, std) {
@@ -271,7 +265,7 @@ function stateReducer(state, action) {
 
 export default function ChecklistApp({ dark = false }) {
   const theme = dark ? DARK : LIGHT
-  T = {
+  const T = {
     ...theme,
     sky: theme.blueM,
     tint: theme.blueL,

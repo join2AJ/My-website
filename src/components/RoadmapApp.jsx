@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { LIGHT, DARK } from '../themes.js'
 
-let T = { ...LIGHT }
-
-const Card = ({ children, style = {} }) => (
+const Card = ({ children, style = {}, T }) => (
   <div style={{ background: T.surface, borderRadius: 14, padding: 14, border: `1px solid ${T.border}`, ...style }}>{children}</div>
 );
 const Pill = ({ label, color, bg }) => (
   <span style={{ display:"inline-flex", alignItems:"center", padding:"2px 9px", borderRadius:20, fontSize:10, fontWeight:700, background: bg || color+"18", color, border:`1px solid ${color}33`, marginRight:4, marginBottom:3 }}>{label}</span>
 );
-const SectionTitle = ({ children }) => (
+const SectionTitle = ({ children, T }) => (
   <div style={{ fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:17, fontWeight:800, color:T.text, letterSpacing:"-0.02em", marginBottom:4 }}>{children}</div>
 );
-const Sub = ({ children }) => (
+const Sub = ({ children, T }) => (
   <div style={{ fontSize:10, color:T.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:8, marginTop:2 }}>{children}</div>
 );
 
@@ -27,7 +25,7 @@ const TOP_NAVS = [
 ];
 
 export default function RoadmapApp({ dark = false }) {
-  T = dark ? DARK : LIGHT
+  const T = dark ? DARK : LIGHT
 
   const threeLayers = [
     {
@@ -234,7 +232,7 @@ export default function RoadmapApp({ dark = false }) {
               { icon:"🔍", role:"Auditor", color:T.green, bg:T.greenL, desc:"Multi-client dashboard. Verify evidence. Generate reports automatically in BCAS/DGCA/ISO format. Track findings to closure. Digital certificates." },
               { icon:"🏛️", role:"Regulator", color:T.gold, bg:T.goldL, desc:"Real-time dashboard: which entities in your jurisdiction are compliant? Issue circulars that auto-populate in every affected business. Inspection prioritisation AI." },
             ].map(u => (
-              <Card key={u.role} style={{ marginBottom:10, borderLeft:`4px solid ${u.color}` }}>
+              <Card T={T} key={u.role} style={{ marginBottom:10, borderLeft:`4px solid ${u.color}` }}>
                 <div style={{ display:"flex", gap:10, alignItems:"center" }}>
                   <div style={{ width:40, height:40, borderRadius:10, background:u.bg, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20, flexShrink:0 }}>{u.icon}</div>
                   <div>
@@ -244,7 +242,7 @@ export default function RoadmapApp({ dark = false }) {
                 </div>
               </Card>
             ))}
-            <Card style={{ background:T.blueL, border:`1.5px solid ${T.blue}44`, marginTop:4 }}>
+            <Card T={T} style={{ background:T.blueL, border:`1.5px solid ${T.blue}44`, marginTop:4 }}>
               <div style={{ fontSize:13, fontWeight:700, color:T.navy, marginBottom:6 }}>💡 The Gap No One Is Filling</div>
               <div style={{ fontSize:12, color:T.sub, lineHeight:1.8 }}>
                 NSWS helps businesses <strong style={{color:T.text}}>get</strong> approvals. MCA21 handles <strong style={{color:T.text}}>corporate filings</strong>. GST portal handles <strong style={{color:T.text}}>tax returns</strong>. But <strong style={{color:T.blue}}>no system tracks ongoing compliance maintenance across all regulators</strong> after initial approvals are obtained. That is exactly the gap CompliantBharat fills.
@@ -270,7 +268,7 @@ export default function RoadmapApp({ dark = false }) {
               const l = threeLayers[layer];
               return (
                 <div className="fade" key={l.id}>
-                  <Card style={{ borderTop:`3px solid ${l.color}`, marginBottom:10 }}>
+                  <Card T={T} style={{ borderTop:`3px solid ${l.color}`, marginBottom:10 }}>
                     <div style={{ padding:"8px 12px", background:l.bg, borderRadius:8, marginBottom:10, border:`1px solid ${l.color}33` }}>
                       <div style={{ fontSize:12, fontWeight:700, color:l.color }}>{l.tagline}</div>
                     </div>
@@ -278,7 +276,7 @@ export default function RoadmapApp({ dark = false }) {
                     <div style={{ fontSize:10, color:T.muted, marginBottom:8 }}>{l.subtitle}</div>
                     <div style={{ fontSize:12, color:T.sub, lineHeight:1.7 }}>{l.description}</div>
                   </Card>
-                  <Card style={{ marginBottom:10 }}>
+                  <Card T={T} style={{ marginBottom:10 }}>
                     <Sub>Real examples in India</Sub>
                     {l.examples.map((ex,i)=>(
                       <div key={i} style={{ display:"flex", gap:8, marginBottom:6 }}>
@@ -291,13 +289,13 @@ export default function RoadmapApp({ dark = false }) {
                   </Card>
                   <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8, marginBottom:10 }}>
                     <Card><Sub>Governed by</Sub><div style={{ fontSize:11, color:T.text, lineHeight:1.5 }}>{l.who}</div></Card>
-                    <Card style={{ background:l.bg, border:`1px solid ${l.color}33` }}><Sub>If missed</Sub><div style={{ fontSize:11, color:l.color, fontWeight:600, lineHeight:1.5 }}>{l.penalty}</div></Card>
+                    <Card T={T} style={{ background:l.bg, border:`1px solid ${l.color}33` }}><Sub>If missed</Sub><div style={{ fontSize:11, color:l.color, fontWeight:600, lineHeight:1.5 }}>{l.penalty}</div></Card>
                   </div>
                   <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
                     <Card><Sub>Managed today</Sub><div style={{ fontSize:11, color:T.red, lineHeight:1.4 }}>{l.current}</div></Card>
-                    <Card style={{ background:T.greenL, border:`1px solid ${T.green}33` }}><Sub>CompliantBharat builds</Sub><div style={{ fontSize:11, color:T.green, lineHeight:1.4 }}>{l.build}</div></Card>
+                    <Card T={T} style={{ background:T.greenL, border:`1px solid ${T.green}33` }}><Sub>CompliantBharat builds</Sub><div style={{ fontSize:11, color:T.green, lineHeight:1.4 }}>{l.build}</div></Card>
                   </div>
-                  <Card style={{ marginTop:10, background:`linear-gradient(135deg, ${T.blueL}, ${T.surface})`, border:`1px solid ${T.blue}33` }}>
+                  <Card T={T} style={{ marginTop:10, background:`linear-gradient(135deg, ${T.blueL}, ${T.surface})`, border:`1px solid ${T.blue}33` }}>
                     <div style={{ fontSize:12, fontWeight:700, color:T.navy, marginBottom:10 }}>🎯 ComplianceScore™ — Three-Dimensional</div>
                     {[{ label:"Regulatory Score", val:71, c:T.red },{ label:"Standards Score", val:45, c:T.blue },{ label:"Gold Score", val:12, c:T.gold },{ label:"Overall Score", val:43, c:T.navy }].map((s,i)=>(
                       <div key={s.label} style={{ marginBottom:10 }}>
@@ -335,7 +333,7 @@ export default function RoadmapApp({ dark = false }) {
               const m = sectorMatrix.find(x=>x.sector===s.sector);
               return (
                 <div className="fade" key={s.sector}>
-                  <Card style={{ borderTop:`3px solid ${s.color}`, marginBottom:10 }}>
+                  <Card T={T} style={{ borderTop:`3px solid ${s.color}`, marginBottom:10 }}>
                     <div style={{ display:"flex", gap:12, alignItems:"center", marginBottom:10 }}>
                       <div style={{ width:48, height:48, borderRadius:12, background:s.color+"18", display:"flex", alignItems:"center", justifyContent:"center", fontSize:24, flexShrink:0 }}>{s.icon}</div>
                       <div style={{ flex:1 }}>
@@ -356,7 +354,7 @@ export default function RoadmapApp({ dark = false }) {
                       <button key={l} onClick={()=>setSectorTab(i)} style={{ flex:1, padding:"8px 4px", borderRadius:10, fontSize:10, fontWeight:700, textAlign:"center", border:"none", background: sectorTab===i ? c+"18" : T.surface, color: sectorTab===i ? c : T.muted, boxShadow: `0 0 0 1.5px ${sectorTab===i ? c : T.border}` }}>{l}</button>
                     ))}
                   </div>
-                  <Card className="fade" key={sectorTab}>
+                  <Card T={T} className="fade" key={sectorTab}>
                     <Sub>{["Mandatory Regulatory Requirements","Industry Standards to Pursue","Gold Standard Benchmarks"][sectorTab]}</Sub>
                     {(m ? [m.regulatory,m.standards,m.gold][sectorTab] : s.items).map((item,i)=>(
                       <div key={i} style={{ display:"flex", gap:8, marginBottom:7 }}>
@@ -391,7 +389,7 @@ export default function RoadmapApp({ dark = false }) {
               const d = deliveryModels[delivery];
               return (
                 <div className="fade" key={d.id}>
-                  <Card style={{ borderTop:`3px solid ${d.color}`, marginBottom:10 }}>
+                  <Card T={T} style={{ borderTop:`3px solid ${d.color}`, marginBottom:10 }}>
                     <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:10 }}>
                       <div style={{ width:44, height:44, borderRadius:12, background:d.bg, display:"flex", alignItems:"center", justifyContent:"center", fontSize:24 }}>{d.icon}</div>
                       <div>
@@ -406,9 +404,9 @@ export default function RoadmapApp({ dark = false }) {
                   </Card>
                   <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8, marginBottom:10 }}>
                     <Card><Sub>Target Customer</Sub><div style={{ fontSize:11, color:T.sub, lineHeight:1.5 }}>{d.forWho}</div></Card>
-                    <Card style={{ background:d.bg, border:`1px solid ${d.color}33` }}><Sub>Pricing</Sub><div style={{ fontSize:13, fontWeight:800, color:d.color }}>{d.pricing}</div></Card>
+                    <Card T={T} style={{ background:d.bg, border:`1px solid ${d.color}33` }}><Sub>Pricing</Sub><div style={{ fontSize:13, fontWeight:800, color:d.color }}>{d.pricing}</div></Card>
                   </div>
-                  <Card style={{ marginBottom:10 }}>
+                  <Card T={T} style={{ marginBottom:10 }}>
                     <Sub>Complexity</Sub>
                     <div style={{ display:"flex", gap:4, marginBottom:4 }}>
                       {[1,2,3,4,5].map(n=><div key={n} style={{ flex:1, height:6, borderRadius:3, background:n<=d.complexity ? d.color : T.border }} />)}
@@ -455,7 +453,7 @@ export default function RoadmapApp({ dark = false }) {
                     </div>
                   </div>
                   {c.services.map((svc)=>(
-                    <Card key={svc.name} style={{ marginBottom:8, borderLeft:`3px solid ${c.color}` }}>
+                    <Card T={T} key={svc.name} style={{ marginBottom:8, borderLeft:`3px solid ${c.color}` }}>
                       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:6, gap:8 }}>
                         <div>
                           <div style={{ fontSize:13, fontWeight:700, color:T.text }}>{svc.name}</div>
@@ -482,7 +480,7 @@ export default function RoadmapApp({ dark = false }) {
             <SectionTitle>12 Revenue Streams</SectionTitle>
             <div style={{ fontSize:12, color:T.sub, marginBottom:14, lineHeight:1.6 }}>AWS charges for compute, storage, bandwidth, API calls, support, training, marketplace commissions. So do we.</div>
             {revenueStreams.map((r)=>(
-              <Card key={r.n} style={{ marginBottom:8, display:"flex", gap:12, alignItems:"flex-start" }}>
+              <Card T={T} key={r.n} style={{ marginBottom:8, display:"flex", gap:12, alignItems:"flex-start" }}>
                 <div style={{ width:36, height:36, borderRadius:10, background:r.color+"15", border:`1px solid ${r.color}33`, display:"flex", alignItems:"center", justifyContent:"center", fontWeight:800, fontSize:11, color:r.color, flexShrink:0 }}>{r.n}</div>
                 <div style={{ flex:1 }}>
                   <div style={{ fontSize:12, fontWeight:700, color:T.text, marginBottom:2 }}>{r.name}</div>
@@ -491,7 +489,7 @@ export default function RoadmapApp({ dark = false }) {
                 </div>
               </Card>
             ))}
-            <Card style={{ background:`linear-gradient(135deg, ${T.blueL}, ${T.surface})`, border:`1.5px solid ${T.blue}44`, marginTop:4 }}>
+            <Card T={T} style={{ background:`linear-gradient(135deg, ${T.blueL}, ${T.surface})`, border:`1.5px solid ${T.blue}44`, marginTop:4 }}>
               <div style={{ fontSize:13, fontWeight:700, color:T.navy, marginBottom:12 }}>📈 Revenue Architecture Over Time</div>
               {[
                 { yr:"2026", streams:"2 streams", desc:"SaaS subscriptions + Managed services", mrr:"₹10–15L MRR" },
@@ -517,7 +515,7 @@ export default function RoadmapApp({ dark = false }) {
           <div>
             <SectionTitle>Think Like AWS</SectionTitle>
             <div style={{ fontSize:12, color:T.sub, marginBottom:14, lineHeight:1.6 }}>AWS started as "rent a server." Became infrastructure for 70% of the internet. Every service made the platform stickier. That is the model.</div>
-            <Card style={{ marginBottom:12 }}>
+            <Card T={T} style={{ marginBottom:12 }}>
               <Sub>Service Analogy Map</Sub>
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:4, marginBottom:4 }}>
                 <div style={{ fontSize:10, color:T.muted, fontWeight:700, padding:"4px 0", borderBottom:`1px solid ${T.border}` }}>AWS Service</div>
@@ -537,7 +535,7 @@ export default function RoadmapApp({ dark = false }) {
               { title:"Charge at every layer", color:T.gold, detail:"AWS charges for compute, storage, bandwidth, API calls, support, training. We charge for subscription, API credits, managed services, audit bookings, training seats, data licensing, commissions." },
               { title:"Government unlocks exponential scale", color:T.navy, detail:"AWS GovCloud unlocked US federal agencies. Our RegulatorDashboard unlocks every regulated entity in India. A single state government MoU brings 50,000 MSMEs onto the platform overnight." },
             ].map(({ title,color,detail })=>(
-              <Card key={title} style={{ marginBottom:8, borderLeft:`3px solid ${color}` }}>
+              <Card T={T} key={title} style={{ marginBottom:8, borderLeft:`3px solid ${color}` }}>
                 <div style={{ fontSize:12, fontWeight:700, color, marginBottom:4 }}>{title}</div>
                 <div style={{ fontSize:11, color:T.sub, lineHeight:1.6 }}>{detail}</div>
               </Card>
