@@ -1,0 +1,15 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Motion" subtitle="Gentle climb on entrance · flap-deploy on expand" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; background:var(--surface-card); font-family:var(--font-sans); padding:24px; }
+  .row { display:flex; gap:18px; align-items:center; }
+  .card { flex:1; padding:14px 16px; background:var(--cloud-100); border:1px solid var(--cloud-200); border-radius:var(--radius-md); animation:cb-climb 700ms var(--ease-cruise) infinite alternate; }
+  .t { font-weight:600; color:var(--text-strong); font-size:14px; }
+  .meta { font-family:var(--font-mono); font-size:10px; color:var(--ink-400); margin-top:4px; }
+</style></head><body>
+  <div class="row">
+    <div class="card"><div class="t">Fade-up · climb</div><div class="meta">cubic-bezier(.22,.61,.36,1) · 220ms</div></div>
+    <div class="card" style="animation-duration:1000ms"><div class="t">Flap deploy · expand</div><div class="meta">cubic-bezier(.34,1.2,.64,1) · 360ms</div></div>
+    <div class="card" style="animation:none"><div class="t">No jarring transitions</div><div class="meta">smooth like cruising altitude</div></div>
+  </div>
+</body></html>

@@ -1,0 +1,18 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Corner radii" subtitle="Fuselage cross-sections — rounded, aerodynamic" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; background:var(--surface-card); font-family:var(--font-sans); padding:24px; }
+  .row { display:flex; gap:18px; align-items:flex-end; }
+  .item { display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .box { width:72px; height:56px; background:var(--cloud-150); border:1px solid var(--cloud-300); }
+  .n { font-family:var(--font-mono); font-size:11px; color:var(--ink-400); }
+  .pill { width:96px; height:34px; border-radius:var(--radius-pill); background:var(--blue-100); color:var(--navy-500); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:11px; font-weight:600; }
+</style></head><body>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius:var(--radius-sm)"></div><span class="n">sm 6</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-md)"></div><span class="n">md 10</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-lg)"></div><span class="n">lg 14</span></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-xl)"></div><span class="n">xl 20</span></div>
+    <div class="item"><div class="pill">pill 999</div><span class="n">fuselage</span></div>
+  </div>
+</body></html>

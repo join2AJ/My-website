@@ -1,0 +1,26 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SECTORS — CompliantBharat is a unified compliance platform spanning 11
+   sectors. Aviation is one. Like regulator liveries, each sector owns one
+   fixed hue (semantic, never decorative). Universal = cross-sector obligations.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --sector-aviation:      #1249C0;   /* sky / cockpit blue (existing brand) */
+  --sector-finance:       #047857;   /* banking emerald */
+  --sector-healthcare:    #0D9488;   /* clinical teal */
+  --sector-manufacturing: #C2410C;   /* industrial ember */
+  --sector-food:          #4D7C0F;   /* harvest green */
+  --sector-it:            #6D28D9;   /* tech violet */
+  --sector-energy:        #CA8A04;   /* power amber */
+  --sector-education:     #4338CA;   /* academic indigo */
+  --sector-universal:     #475569;   /* cross-sector slate */
+
+  --sector-aviation-soft:      #DBE7FF;
+  --sector-finance-soft:       #D1FAE7;
+  --sector-healthcare-soft:    #CCFBF1;
+  --sector-manufacturing-soft: #FFE4D3;
+  --sector-food-soft:          #E6F2D2;
+  --sector-it-soft:            #EDE4FE;
+  --sector-energy-soft:        #FBF0CE;
+  --sector-education-soft:     #E0E2FB;
+  --sector-universal-soft:     #E7ECF3;
+}

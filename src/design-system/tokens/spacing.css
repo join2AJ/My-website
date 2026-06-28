@@ -1,0 +1,34 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SPACING & RADII — instrument-panel rhythm (4px base grid)
+   Pills/tags echo fuselage cross-sections: generous, aerodynamic radii.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --space-0:  0;
+  --space-1:  2px;
+  --space-2:  4px;
+  --space-3:  8px;
+  --space-4:  12px;
+  --space-5:  16px;
+  --space-6:  20px;
+  --space-7:  24px;
+  --space-8:  32px;
+  --space-9:  40px;
+  --space-10: 48px;
+  --space-12: 64px;
+  --space-14: 80px;
+  --space-16: 96px;
+
+  /* ── radii ───────────────────────────────────────────────────────────── */
+  --radius-xs:   3px;
+  --radius-sm:   6px;
+  --radius-md:   10px;   /* default card / instrument panel */
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-pill: 999px;  /* fuselage cross-section */
+
+  /* ── layout ──────────────────────────────────────────────────────────── */
+  --nav-width:   248px;
+  --nav-height:  60px;
+  --container:   1280px;
+  --strip-gap:   10px;   /* between flight strips */
+}

@@ -1,10 +1,22 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   COMPLIANTBHARAT OFFICIAL DESIGN SYSTEM
+   Import design tokens and component styles
+═════════════════════════════════════════════════════════════════════════ */
+@import './design-system/tokens/fonts.css';
+@import './design-system/tokens/colors.css';
+@import './design-system/tokens/spacing.css';
+@import './design-system/tokens/typography.css';
+@import './design-system/tokens/effects.css';
+@import './design-system/tokens/sectors.css';
+@import './design-system/styles.css';
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
-body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; overflow-x: hidden; }
+body { font-family: var(--font-sans); overflow-x: hidden; }
 button { font-family: inherit; cursor: pointer; }
 input, textarea { font-family: inherit; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border-hairline); border-radius: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 
 /* ── Shared back-bar (App.jsx) ── */

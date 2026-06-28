@@ -1,112 +1,115 @@
-// CompliantBharat Design System - Premium Edition
-// Inspired by Indowud: Cream backgrounds, sage green accents, dark navy, breathing room
+/**
+ * CompliantBharat Themes
+ *
+ * This provides backwards compatibility with the old theme API while
+ * using the official design system CSS variables. The actual colors
+ * are defined in design-system/tokens/colors.css
+ */
 
+// Light theme (default) - uses CSS variables
 export const LIGHT = {
-  // Primary: Premium palette
-  navy:     '#1A1F2E',      // Dark navy (primary text)
-  sage:     '#A8B868',      // Sage green accent
-  cream:    '#F5F1E8',      // Warm cream background
-  white:    '#FFFFFF',      // Pure white for cards
-
   // Surfaces
-  app:      '#F5F1E8',      // App background
-  surface:  '#FFFFFF',      // Card surfaces
-  dark:     '#2A2F3E',      // Dark section background
+  bg: 'var(--surface-app)',
+  surface: 'var(--surface-card)',
+  card: 'var(--surface-card)',
+  dark: 'var(--navy-800)',
 
   // Text
-  text:     '#1A1F2E',      // Primary text
-  sub:      '#6B7280',      // Secondary text
-  muted:    '#9CA3AF',      // Tertiary text
-
-  // Borders & dividers
-  border:   '#E5E0D5',      // Light borders
-  divider:  '#D4CFC4',      // Stronger dividers
-
-  // Accents
-  green:    '#A8B868',      // Sage green
-  greenL:   '#E8EFD5',      // Light sage
-  blue:     '#4B5B9F',      // Deep blue
-  blueL:    '#E5EBF7',      // Light blue
-  gold:     '#C9A961',      // Gold accent
-  goldL:    '#F5F0E8',      // Light gold
-  red:      '#D97706',      // Red/warning
-  redL:     '#FEE2E2',      // Light red
-  amber:    '#D97706',      // Amber
-  amberL:   '#FEF3C7',      // Light amber
-  purple:   '#7E7B9F',      // Purple
-  purpleL:  '#F5F3FF',      // Light purple
-  teal:     '#6B9199',      // Teal
-  tealL:    '#D1E5EA',      // Light teal
-
-  // Sector Liveries (earthy palette)
-  sectorAviation:      '#4B5B9F',  // Deep blue
-  sectorFinance:       '#7BA888',  // Sage green
-  sectorHealthcare:    '#6B9199',  // Teal
-  sectorManufacturing: '#A37D5C',  // Warm brown
-  sectorFood:          '#A8B868',  // Sage green
-  sectorIT:            '#7E7B9F',  // Purple
-  sectorEnergy:        '#C9A961',  // Gold
-  sectorEducation:     '#5B6B8F',  // Indigo
-  sectorUniversal:     '#9CA3AF',  // Slate
-
-  // Aliases
-  card:     '#FFFFFF',
-  accent:   '#A8B868',
-  bg:       '#F5F1E8',
-  blueM:    '#7B8FB5',
-}
-
-export const DARK = {
-  // Dark mode palette
-  navy:     '#F5F1E8',      // Light text on dark
-  sage:     '#B8C878',      // Lighter sage
-  cream:    '#1A1F2E',      // Dark background
-  white:    '#2A2F3E',      // Dark cards
-
-  // Surfaces
-  app:      '#1A1F2E',      // Dark background
-  surface:  '#2A2F3E',      // Dark cards
-  dark:     '#0F1219',      // Even darker
-
-  // Text
-  text:     '#F5F1E8',      // Light text
-  sub:      '#C7C9C9',      // Secondary text
-  muted:    '#9CA3AF',      // Tertiary text
+  text: 'var(--text-strong)',
+  sub: 'var(--text-secondary)',
+  muted: 'var(--text-muted)',
 
   // Borders
-  border:   '#3A3F4E',      // Dark borders
-  divider:  '#4A4F5E',      // Stronger dividers
+  border: 'var(--border-hairline)',
+  divider: 'var(--border-strong)',
+
+  // Primary colors (Navy-blue ramp)
+  navy: 'var(--navy-800)',
+  navyL: 'var(--navy-400)',
+  blue: 'var(--navy-500)',
+  blueL: 'var(--blue-100)',
+  blueM: 'var(--blue-300)',
+
+  // Status colors (runway lights)
+  green: 'var(--status-clear)',
+  greenL: 'var(--status-clear-soft)',
+  amber: 'var(--status-caution)',
+  amberL: 'var(--status-caution-soft)',
+  red: 'var(--status-stop)',
+  redL: 'var(--status-stop-soft)',
 
   // Accents
-  green:    '#B8C878',      // Lighter sage
-  greenL:   '#2A3422',      // Dark sage bg
-  blue:     '#7B9FD9',      // Lighter blue
-  blueL:    '#1A2A4A',      // Dark blue bg
-  gold:     '#E8BA68',      // Lighter gold
-  goldL:    '#3A2A1A',      // Dark gold bg
-  red:      '#FF6B6B',      // Bright red
-  redL:     '#4A1A1A',      // Dark red bg
-  amber:    '#FFB84D',      // Lighter amber
-  amberL:   '#4A3A1A',      // Dark amber bg
-  purple:   '#B8B5D9',      // Lighter purple
-  purpleL:  '#2A283A',      // Dark purple bg
-  teal:     '#7BD4E8',      // Lighter teal
-  tealL:    '#1A3A4A',      // Dark teal bg
+  accent: 'var(--accent)',
+  gold: 'var(--status-caution)',
+  goldL: 'var(--status-caution-soft)',
+  purple: 'var(--navy-600)',
+  purpleL: 'var(--blue-100)',
+  teal: 'var(--status-clear)',
+  tealL: 'var(--status-clear-soft)',
 
-  // Sector Liveries
-  sectorAviation:      '#7B9FD9',
-  sectorFinance:       '#8BC898',
-  sectorHealthcare:    '#7BAAB9',
-  sectorManufacturing: '#C9A889',
-  sectorFood:          '#B8C878',
-  sectorIT:            '#B8B5D9',
-  sectorEnergy:        '#E8BA68',
-  sectorEducation:     '#8B9BAF',
-  sectorUniversal:     '#B5B9C9',
+  // Sector liveries
+  sectorAviation: 'var(--sector-aviation)',
+  sectorFinance: 'var(--sector-finance)',
+  sectorHealthcare: 'var(--sector-healthcare)',
+  sectorManufacturing: 'var(--sector-manufacturing)',
+  sectorFood: 'var(--sector-food)',
+  sectorIT: 'var(--sector-it)',
+  sectorEnergy: 'var(--sector-energy)',
+  sectorEducation: 'var(--sector-education)',
+  sectorUniversal: 'var(--sector-universal)',
+};
 
-  // Aliases
-  card:     '#2A2F3E',
-  accent:   '#B8C878',
-  bg:       '#1A1F2E',
-  blueM:    '#8BA5C9',
-}
+// Dark theme - inverts surfaces, keeps action colors consistent
+export const DARK = {
+  // Surfaces (inverted)
+  bg: 'var(--navy-900)',
+  surface: 'var(--navy-800)',
+  card: 'var(--navy-800)',
+  dark: 'var(--surface-app)',
+
+  // Text (light on dark)
+  text: 'var(--text-on-dark)',
+  sub: 'var(--blue-200)',
+  muted: 'var(--text-muted)',
+
+  // Borders
+  border: 'var(--navy-600)',
+  divider: 'var(--navy-500)',
+
+  // Primary colors (stay consistent)
+  navy: 'var(--navy-500)',
+  navyL: 'var(--blue-300)',
+  blue: 'var(--blue-400)',
+  blueL: 'var(--navy-600)',
+  blueM: 'var(--blue-300)',
+
+  // Status colors (brighter for contrast on dark)
+  green: 'var(--green-500)',
+  greenL: 'var(--green-700)',
+  amber: 'var(--amber-500)',
+  amberL: 'var(--amber-700)',
+  red: 'var(--red-500)',
+  redL: 'var(--red-700)',
+
+  // Accents
+  accent: 'var(--blue-400)',
+  gold: 'var(--amber-500)',
+  goldL: 'var(--amber-700)',
+  purple: 'var(--navy-600)',
+  purpleL: 'var(--navy-500)',
+  teal: 'var(--green-500)',
+  tealL: 'var(--green-700)',
+
+  // Sector liveries (brightened for dark mode)
+  sectorAviation: 'var(--sector-aviation)',
+  sectorFinance: 'var(--sector-finance)',
+  sectorHealthcare: 'var(--sector-healthcare)',
+  sectorManufacturing: 'var(--sector-manufacturing)',
+  sectorFood: 'var(--sector-food)',
+  sectorIT: 'var(--sector-it)',
+  sectorEnergy: 'var(--sector-energy)',
+  sectorEducation: 'var(--sector-education)',
+  sectorUniversal: 'var(--sector-universal)',
+};
+
+export default { LIGHT, DARK };

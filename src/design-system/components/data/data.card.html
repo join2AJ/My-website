@@ -1,0 +1,52 @@
+<!-- @dsCard group="Components" viewport="760x340" name="Flight Strips, Progress & Comm Box" subtitle="Signature compliance units" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--surface-app); font-family: var(--font-sans); }
+  #root { padding: 22px 24px; }
+  .stack { display: flex; flex-direction: column; gap: 10px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; align-items: start; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { FlightStrip, ProgressBar, CommBox, Card } = window.CompliantBharatAviationDesignSystem_77e7f4;
+  function Demo() {
+    return (
+      <div>
+        <div className="stack">
+          <FlightStrip code="BCAS-AEP-11" regulator="BCAS" status="stop" due="OVERDUE 3D"
+            title="Airport Entry Permit register reconciliation" department="Aerodrome Security"
+            detail="Quarterly reconciliation of all active AEPs against current employment records. 4 holders pending de-provisioning." defaultExpanded />
+          <FlightStrip code="DGCA-CAR-145" regulator="DGCA" status="caution" due="DUE 14D"
+            title="CAR Section 2 Series F maintenance audit" department="Engineering" detail="Annual airworthiness review." />
+          <FlightStrip code="CERT-IN-06" regulator="CERT-In" status="clear" due="FILED"
+            title="Incident reporting within 6 hours — SOP attestation" department="IT & Cyber" />
+        </div>
+        <div className="grid">
+          <Card padding="18px">
+            <ProgressBar value={82} tone="clear" label="Terminal 3 readiness" />
+            <div style={{ height: 14 }} />
+            <ProgressBar value={46} tone="caution" label="Cyber posture" />
+          </Card>
+          <CommBox title="AUDIT · TRAIL" lines={[
+            { time: '0941Z', text: 'AEP register synced', tone: 'clear' },
+            { time: '1102Z', text: 'CIAD-2026-04 ingested', tone: 'caution' },
+            { time: '1130Z', text: 'BCAS-AEP-11 overdue', tone: 'stop' },
+          ]} />
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

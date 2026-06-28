@@ -1,0 +1,29 @@
+<!-- @dsCard group="Brand" viewport="700x300" name="Logo" subtitle="Wordmark + three mark options to choose from" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; font-family:var(--font-sans); background:var(--surface-card); }
+  .lockups { display:grid; grid-template-columns:1fr 1fr; }
+  .cell { padding:26px 28px; display:flex; align-items:center; }
+  .light { border-right:1px solid var(--cloud-200); border-bottom:1px solid var(--cloud-200); }
+  .dark { background:var(--navy-800); border-bottom:1px solid var(--navy-700); }
+  .marks { padding:20px 28px 24px; }
+  .lbl { font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-300); margin-bottom:14px; }
+  .row { display:flex; gap:18px; }
+  .opt { display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; padding:14px; border:1px solid var(--cloud-200); border-radius:var(--radius-md); }
+  .opt .name { font-size:12px; font-weight:600; color:var(--text-strong); }
+  .opt .hint { font-size:10px; color:var(--ink-400); }
+  img { display:block; }
+</style></head><body>
+  <div class="lockups">
+    <div class="cell light"><img src="../assets/logo-wordmark.svg" height="44" alt="wordmark" style="padding: 0px; object-fit: cover; margin: 0px" /></div>
+    <div class="cell dark"><img src="../assets/logo-wordmark-light.svg" height="44" alt="wordmark dark" /></div>
+  </div>
+  <div class="marks">
+    <div class="lbl">Primary mark: Chevron (locked) — alternates kept on file</div>
+    <div class="row">
+      <div class="opt" style="border-color:var(--navy-500);box-shadow:0 0 0 1px var(--navy-500)"><img src="../assets/logo-mark.svg" width="56" height="56" alt="chevron mark" /><span class="name">Chevron ✓</span><span class="hint">Approach path · primary</span></div>
+      <div class="opt"><img src="../assets/mark-shield.svg" width="56" height="56" alt="shield mark" /><span class="name">Shield + check</span><span class="hint">Assurance / trust</span></div>
+      <div class="opt"><img src="../assets/mark-monogram.svg" width="56" height="56" alt="monogram mark" /><span class="name">C-check</span><span class="hint">Compliance monogram</span></div>
+    </div>
+  </div>
+</body></html>

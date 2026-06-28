@@ -1,0 +1,34 @@
+<!-- @dsCard group="Components" viewport="700x150" name="Tabs" subtitle="Underline view switcher with count pills" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--surface-card); font-family: var(--font-sans); }
+  #root { padding: 22px 24px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Tabs } = window.CompliantBharatAviationDesignSystem_77e7f4;
+  function Demo() {
+    const [v, setV] = React.useState('all');
+    return (
+      <Tabs value={v} onChange={setV} tabs={[
+        { value: 'all', label: 'All obligations', count: 418 },
+        { value: 'breach', label: 'Breach', count: 11 },
+        { value: 'caution', label: 'Caution', count: 41 },
+        { value: 'cleared', label: 'Cleared', count: 366 },
+      ]} />
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>
