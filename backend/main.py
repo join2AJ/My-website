@@ -115,15 +115,15 @@ async def health_check():
 # IMPORT AND INCLUDE ROUTERS
 # ════════════════════════════════════════════════════════════════════════════
 
-# Import routers - these will be created next
-# from routers import auth, entities, individuals, applications, admin, committees, zones, penalties, audit, dashboards
+from routers import auth, entities, individuals, committees
 
-# app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
-# app.include_router(entities.router, prefix="/api/entities", tags=["Entities"])
-# app.include_router(individuals.router, prefix="/api/individuals", tags=["Individuals"])
-# app.include_router(applications.router, prefix="/api/applications", tags=["Applications"])
-# app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
-# app.include_router(committees.router, prefix="/api/committees", tags=["Committees"])
+app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
+app.include_router(entities.router, prefix="/api/entities", tags=["Entities"])
+app.include_router(individuals.router, prefix="/api/individuals", tags=["Individuals"])
+app.include_router(committees.router, prefix="/api/committees", tags=["Committees"])
+
+# Additional routers (Phase 3+)
+# from routers import zones, penalties, audit, dashboards
 # app.include_router(zones.router, prefix="/api/zones", tags=["Zones"])
 # app.include_router(penalties.router, prefix="/api/penalties", tags=["Penalties"])
 # app.include_router(audit.router, prefix="/api/audit", tags=["Audit"])
