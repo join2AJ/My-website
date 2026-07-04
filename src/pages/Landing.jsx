@@ -652,18 +652,6 @@ function Footer() {
 export default function Landing({ dark: forceDark = false, onToggleDark, onViewRoadmap, onViewAviation, onViewChecklists, onViewAdmin }) {
   return (
     <div>
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(20px); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        * { box-sizing: border-box; }
-      `}</style>
-
       <HeroSection />
       <ProblemsSection />
       <SolutionSection />
