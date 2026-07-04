@@ -1,0 +1,19 @@
+<!-- @dsCard group="Colors" viewport="700x160" name="Runway-light status" subtitle="Green = clear · Amber = caution · Red = stop" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; background:var(--surface-card); font-family:var(--font-sans); }
+  .wrap { display:flex; gap:14px; padding:20px; }
+  .col { flex:1; }
+  .chip { height:64px; border-radius:var(--radius-sm); display:flex; align-items:center; gap:10px; padding:0 14px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .meta { margin-top:8px; }
+  .lbl { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-500); }
+  .hx { font-family:var(--font-mono); font-size:11px; color:var(--ink-400); }
+</style></head><body>
+<div class="wrap">
+  <div class="col"><div class="chip" style="background:var(--status-clear-soft)"><span class="dot" style="background:var(--status-clear)"></span><span style="color:var(--green-700);font-weight:600">Clear</span></div><div class="meta"><div class="lbl">Cleared to land</div><div class="hx">#047857 / soft #D7F5E8</div></div></div>
+  <div class="col"><div class="chip" style="background:var(--status-caution-soft)"><span class="dot" style="background:var(--status-caution)"></span><span style="color:var(--amber-700);font-weight:600">Caution</span></div><div class="meta"><div class="lbl">Hold short</div><div class="hx">#D97706 / soft #FEF0DA</div></div></div>
+  <div class="col"><div class="chip" style="background:var(--status-stop-soft)"><span class="dot" style="background:var(--status-stop)"></span><span style="color:var(--red-700);font-weight:600">Stop</span></div><div class="meta"><div class="lbl">Breach / PAPI red</div><div class="hx">#DC2626 / soft #FEE2E2</div></div></div>
+  <div class="col"><div class="chip" style="background:var(--status-info-soft)"><span class="dot" style="background:var(--status-info)"></span><span style="color:var(--navy-500);font-weight:600">Info</span></div><div class="meta"><div class="lbl">In review</div><div class="hx">#1249C0 / soft #DBE7FF</div></div></div>
+</div>
+</body></html>

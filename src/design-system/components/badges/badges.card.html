@@ -1,0 +1,61 @@
+<!-- @dsCard group="Components" viewport="700x250" name="Badges, Regulator & Sector Tags" subtitle="Runway-light status + regulator & sector liveries" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--surface-app); font-family: var(--font-sans); }
+  #root { padding: 22px 24px; }
+  .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { StatusBadge, RegulatorTag, SectorTag, Tag } = window.CompliantBharatAviationDesignSystem_77e7f4;
+  function Demo() {
+    return (
+      <div>
+        <div className="row">
+          <StatusBadge status="clear">Compliant</StatusBadge>
+          <StatusBadge status="caution">Due 14d</StatusBadge>
+          <StatusBadge status="stop">Breach</StatusBadge>
+          <StatusBadge status="info">In review</StatusBadge>
+          <StatusBadge status="stop" solid>Critical</StatusBadge>
+        </div>
+        <div className="row">
+          <RegulatorTag regulator="BCAS" />
+          <RegulatorTag regulator="DGCA" />
+          <RegulatorTag regulator="AAI" />
+          <RegulatorTag regulator="AERA" />
+          <RegulatorTag regulator="MoEF" />
+          <RegulatorTag regulator="EPFO" />
+          <RegulatorTag regulator="CERT-In" />
+        </div>
+        <div className="row">
+          <SectorTag sector="aviation" />
+          <SectorTag sector="finance" />
+          <SectorTag sector="healthcare" />
+          <SectorTag sector="it" />
+          <SectorTag sector="energy" />
+          <SectorTag sector="universal" variant="outline" />
+        </div>
+        <div className="row">
+          <RegulatorTag regulator="BCAS" variant="solid" />
+          <RegulatorTag regulator="DGCA" variant="outline" />
+          <Tag>21 departments</Tag>
+          <Tag tone="blue" mono>AEP-2024-118</Tag>
+          <Tag tone="dark">Terminal 3</Tag>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- @dsCard group="Type" viewport="700x150" name="Cockpit labels" subtitle="All-caps + tracking, like TORA / PAPI / AEP" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; background:var(--surface-card); font-family:var(--font-sans); padding:24px; }
+  .row { display:flex; gap:28px; flex-wrap:wrap; margin-bottom:18px; }
+  .lab { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-300); margin-bottom:4px; }
+  .val { font-family:var(--font-mono); font-weight:600; font-size:18px; color:var(--text-strong); }
+  .meta { font-family:var(--font-mono); font-size:11px; color:var(--ink-400); }
+</style></head><body>
+  <div class="row">
+    <div><div class="lab">Obligations</div><div class="val">418</div></div>
+    <div><div class="lab">Cleared</div><div class="val" style="color:var(--status-clear)">366</div></div>
+    <div><div class="lab">Caution</div><div class="val" style="color:var(--amber-700)">41</div></div>
+    <div><div class="lab">Breach</div><div class="val" style="color:var(--status-stop)">11</div></div>
+  </div>
+  <div class="meta">.cb-label utility · 11px · weight 600 · tracking 0.12em · uppercase · ink-300</div>
+</body></html>

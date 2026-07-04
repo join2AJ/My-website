@@ -1,0 +1,40 @@
+<!-- @dsCard group="Console" viewport="1320x860" name="Compliance Console" subtitle="Interactive EFIS-style compliance dashboard" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CompliantBharat · Console</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--surface-app); font-family: var(--font-sans); color: var(--text-body); }
+  #root { height: 100vh; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--cloud-300); border-radius: 999px; border: 2px solid var(--surface-app); }
+  .cb-icon { width: 18px; height: 18px; display: inline-flex; flex: none; }
+  .cb-fade { animation: cb-rise var(--dur-slow) var(--ease-cruise) both; }
+  @keyframes cb-rise { from { transform: translateY(8px); } to { transform: none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="data.jsx"></script>
+<script type="text/babel" src="Sidebar.jsx"></script>
+<script type="text/babel" src="Topbar.jsx"></script>
+<script type="text/babel" src="DashboardScreen.jsx"></script>
+<script type="text/babel" src="ObligationsScreen.jsx"></script>
+<script type="text/babel" src="DepartmentScreen.jsx"></script>
+<script type="text/babel" src="LoginScreen.jsx"></script>
+<script type="text/babel" src="App.jsx"></script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.getElementById('root')).render(<window.CBApp />);
+</script>
+</body>
+</html>

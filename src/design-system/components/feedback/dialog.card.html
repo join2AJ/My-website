@@ -1,0 +1,52 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Dialog" subtitle="Modal — backdrop blur, instrument-panel card" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--surface-app); font-family: var(--font-sans); }
+  /* contain the fixed backdrop within the card preview */
+  #root { position: relative; height: 100vh; overflow: hidden; }
+  #root > div { position: absolute !important; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Dialog, Button } = window.CompliantBharatAviationDesignSystem_77e7f4;
+  function Demo() {
+    const [open, setOpen] = React.useState(true);
+    return (
+      <React.Fragment>
+        {!open && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+            <Button variant="danger" onClick={() => setOpen(true)}>Flag breach…</Button>
+          </div>
+        )}
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Flag breach?"
+          subtitle="BCAS-AEP-11 will be escalated to the security head."
+          footer={
+            <React.Fragment>
+              <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button variant="danger" onClick={() => setOpen(false)}>Flag breach</Button>
+            </React.Fragment>
+          }
+        >
+          This records a breach against <strong>Aerodrome Security</strong> and notifies the obligation owner. The audit trail will log the escalation with a timestamp.
+        </Dialog>
+      </React.Fragment>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

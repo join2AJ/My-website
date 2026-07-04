@@ -1,0 +1,9 @@
+/* ── Webfonts ──────────────────────────────────────────────────────────
+   Instrument Serif  → display / authoritative headings (instrument labels)
+   Outfit            → primary body / UI text
+   Plus Jakarta Sans → alternate body (denser data tables)
+   JetBrains Mono    → avionics readouts, codes, comm boxes
+   Served from Google Fonts. If you have licensed binaries, drop them in
+   assets/fonts/ and replace these @import lines with local @font-face rules.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');

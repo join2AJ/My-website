@@ -1,0 +1,33 @@
+<!-- @dsCard group="Marketing" viewport="1320x900" name="Compliance Platform — Landing" subtitle="Parent-brand marketing site · 3 hero directions" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CompliantBharat · Compliance Intelligence</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--surface-card); font-family: var(--font-sans); color: var(--text-body); }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--cloud-300); border-radius: 999px; border: 2px solid var(--surface-card); }
+  a { color: inherit; text-decoration: none; }
+  .cb-fade { animation: cb-rise var(--dur-slow) var(--ease-cruise) both; }
+  @keyframes cb-rise { from { transform: translateY(8px); } to { transform: none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel" src="Landing.jsx"></script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.getElementById('root')).render(<window.CBLanding />);
+</script>
+</body>
+</html>

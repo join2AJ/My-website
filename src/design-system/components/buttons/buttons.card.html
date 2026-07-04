@@ -1,0 +1,68 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Buttons" subtitle="5 variants · 3 sizes · states" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--surface-app); font-family: var(--font-sans); }
+  #root { padding: 24px 26px; }
+  .group { margin-bottom: 22px; }
+  .group:last-child { margin-bottom: 0; }
+  .lbl { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-300); margin-bottom: 11px; }
+  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button } = window.CompliantBharatAviationDesignSystem_77e7f4;
+  const Ic = ({ d, size = 16 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">{d}</svg>
+  );
+  const Plus = <Ic d={<path d="M12 5v14M5 12h14" />} />;
+  const Arrow = <Ic d={<path d="M5 12h14M13 6l6 6-6 6" />} />;
+  const Scan = <Ic d={<g><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" /><path d="M3 12h18" /></g>} />;
+
+  function Demo() {
+    return (
+      <div>
+        <div className="group">
+          <div className="lbl">Variants</div>
+          <div className="row">
+            <Button variant="primary" iconLeft={Scan}>Run scan</Button>
+            <Button variant="secondary" iconLeft={Plus}>Add obligation</Button>
+            <Button variant="ghost">Dismiss</Button>
+            <Button variant="danger">Flag breach</Button>
+            <Button variant="dark">Open cockpit</Button>
+          </div>
+        </div>
+        <div className="group">
+          <div className="lbl">Sizes &amp; shape</div>
+          <div className="row">
+            <Button size="sm">Small</Button>
+            <Button size="md">Medium</Button>
+            <Button size="lg" iconRight={Arrow}>Large</Button>
+            <Button pill variant="secondary">Pill · fuselage</Button>
+          </div>
+        </div>
+        <div className="group">
+          <div className="lbl">States</div>
+          <div className="row">
+            <Button variant="primary" iconRight={Arrow}>Continue</Button>
+            <Button variant="secondary">Default</Button>
+            <Button disabled>Disabled</Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>
